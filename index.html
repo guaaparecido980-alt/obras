@@ -1184,6 +1184,420 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }
+
+/* =========================================================
+   V2 — CONVERSION MACHINE
+   ========================================================= */
+
+/* Live people-online dot in header */
+.people-online{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:var(--t-12); color:var(--taupe);
+  padding: 4px 10px; border:1px solid var(--line); border-radius: var(--r-pill);
+  background: rgba(255,255,255,0.5); backdrop-filter: blur(8px);
+}
+.people-online .dot{
+  width:6px; height:6px; border-radius:50%; background:#5C8C5A;
+  position:relative; flex-shrink:0;
+}
+.people-online .dot::before{
+  content:""; position:absolute; inset:-4px; border-radius:50%;
+  border:1px solid #5C8C5A; animation: pulseDot 1.8s ease-out infinite;
+}
+@keyframes pulseDot{
+  0%{ transform: scale(0.7); opacity: 0.8; }
+  100%{ transform: scale(1.6); opacity: 0; }
+}
+@media (max-width: 720px){ .people-online span.txt{ display:none; } }
+
+/* Scarcity / urgency bar on PDP */
+.urgency-stack{
+  display:grid; gap: var(--s-12);
+  margin: var(--s-12) 0 var(--s-24);
+  padding: var(--s-16);
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #FBF8F1 0%, var(--ivory) 100%);
+  border-radius: var(--r-2);
+}
+.urgency-item{
+  display:flex; align-items:center; gap: var(--s-12);
+  font-size: var(--t-14); color: var(--ink);
+}
+.urgency-item svg{ width:18px; height:18px; flex-shrink:0; color: var(--terracotta); stroke:currentColor; fill:none; stroke-width:1.5; }
+.urgency-item strong{ color: var(--terracotta-deep); font-weight:500; }
+.stock-bar{
+  height:6px; background: var(--bone); position:relative; overflow:hidden;
+  border-radius: var(--r-pill);
+}
+.stock-bar::after{
+  content:""; position:absolute; inset:0 auto 0 0; width: var(--stock-w, 30%);
+  background: linear-gradient(90deg, var(--terracotta), var(--terracotta-deep));
+  transition: width 900ms var(--ease);
+}
+.live-dot{
+  width:8px; height:8px; border-radius:50%; background: var(--terracotta);
+  position:relative; display:inline-block; flex-shrink:0;
+}
+.live-dot::before{
+  content:""; position:absolute; inset:-5px; border-radius:50%;
+  box-shadow: 0 0 0 0 rgba(178,84,62,0.55);
+  animation: pulseDot2 1.8s ease-out infinite;
+}
+@keyframes pulseDot2{
+  0%{ box-shadow: 0 0 0 0 rgba(178,84,62,0.55); }
+  100%{ box-shadow: 0 0 0 14px rgba(178,84,62,0); }
+}
+
+/* Big kill CTA + microcopy cluster */
+.cta-cluster{ display:grid; gap: 8px; }
+.cta-cluster .btn-primary{
+  min-height: 64px; font-size: var(--t-14); letter-spacing: 0.16em;
+  background: var(--ink); color: var(--ivory); position:relative; overflow:hidden;
+}
+.cta-cluster .btn-primary::after{
+  content:""; position:absolute; inset:0; background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+  transform: translateX(-100%); transition: transform 1.2s var(--ease);
+}
+.cta-cluster .btn-primary:hover::after{ transform: translateX(100%); }
+.cta-micro{
+  display:flex; flex-wrap:wrap; justify-content:center; gap: 14px;
+  font-size: var(--t-12); color: var(--taupe); padding-top: 6px;
+}
+.cta-micro span{ display:inline-flex; align-items:center; gap:6px; }
+.cta-micro svg{ width:13px; height:13px; stroke:var(--moss); fill:none; stroke-width:1.8; }
+
+/* Guarantee box */
+.guarantee-box{
+  display:grid; grid-template-columns: 56px 1fr; gap: var(--s-16);
+  align-items:center; padding: var(--s-16);
+  border: 1px solid var(--line); background: var(--white);
+  margin: var(--s-24) 0; border-radius: var(--r-2);
+}
+.guarantee-box .seal{
+  width:56px; height:56px; border:2px solid var(--moss); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  color: var(--moss); font-family:'Fraunces',serif; font-size: var(--t-12);
+  letter-spacing: 0.08em; text-align:center; line-height:1; padding:4px;
+}
+.guarantee-box h4{ font-family:'Fraunces',serif; font-size: var(--t-16); font-weight:500; margin-bottom:2px; }
+.guarantee-box p{ font-size: var(--t-12); color: var(--taupe); }
+
+/* Why choose block */
+.why-block{
+  display:grid; grid-template-columns: repeat(2,1fr); gap: var(--s-16);
+  margin: var(--s-48) 0;
+}
+.why-block h3.sh__title{ grid-column: 1/-1; font-family:'Fraunces',serif; font-size: var(--t-31); font-weight:400; margin-bottom: var(--s-16); }
+.why-item{
+  padding: var(--s-24); border:1px solid var(--line);
+  background: var(--white); display:flex; gap: var(--s-16);
+}
+.why-item .num{
+  font-family:'Fraunces',serif; font-size: var(--t-25); color: var(--terracotta);
+  font-style: italic; line-height:1; flex-shrink:0;
+}
+.why-item h4{ font-family:'Fraunces',serif; font-size: var(--t-20); font-weight:400; margin-bottom:6px; }
+.why-item p{ font-size: var(--t-14); color: var(--ink-soft); }
+@media (max-width: 720px){ .why-block{ grid-template-columns: 1fr; } }
+
+/* Sensory "o que você vai sentir" block */
+.sensory-block{
+  background: var(--ink); color: var(--ivory); padding: var(--s-64) var(--s-32);
+  margin: var(--s-48) calc(-1 * var(--s-32));
+  display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-48); align-items:center;
+}
+.sensory-block img{ aspect-ratio: 4/5; object-fit:cover; width:100%; }
+.sensory-block h3{ font-family:'Fraunces',serif; font-size: var(--t-39); font-weight:400; margin-bottom: var(--s-24); }
+.sensory-block ul{ display:grid; gap: var(--s-16); }
+.sensory-block li{
+  display:flex; gap: var(--s-16); align-items:flex-start;
+  border-top: 1px solid rgba(244,241,236,0.12); padding-top: var(--s-16);
+}
+.sensory-block li:first-child{ border-top:0; padding-top:0; }
+.sensory-block li .k{ font-family:'Fraunces',serif; font-style:italic; color:#CBB99E; min-width: 100px; }
+@media (max-width: 1024px){ .sensory-block{ grid-template-columns: 1fr; gap: var(--s-32); padding: var(--s-48) var(--s-24); margin: var(--s-48) calc(-1 * var(--s-16)); } }
+
+/* Comparison table */
+.vs-block{ margin: var(--s-48) 0; }
+.vs-block h3{ font-family:'Fraunces',serif; font-size: var(--t-31); font-weight:400; margin-bottom: var(--s-24); }
+.vs-grid{
+  display:grid; grid-template-columns: 1fr 1fr 1fr;
+  border: 1px solid var(--line); background: var(--white);
+}
+.vs-grid > div{ padding: var(--s-16); border-right:1px solid var(--line); border-bottom:1px solid var(--line); font-size: var(--t-14); }
+.vs-grid > div:nth-child(3n){ border-right:0; }
+.vs-grid .vs-head{ background: var(--bone); font-family:'Fraunces',serif; font-size: var(--t-16); font-weight:500; }
+.vs-grid .vs-ours{ background: #FBF8F1; color: var(--ink); position:relative; }
+.vs-grid .vs-ours::before{ content:"✓"; color: var(--moss); font-weight:600; margin-right:8px; }
+.vs-grid .vs-them::before{ content:"×"; color: var(--taupe-soft); margin-right:8px; }
+@media (max-width: 720px){
+  .vs-grid{ grid-template-columns: 1fr 1fr; }
+  .vs-grid .vs-head:first-child{ display:none; }
+  .vs-grid .vs-row-label{ grid-column: 1/-1; background: var(--bone); font-family:'Fraunces',serif; font-weight:500; }
+}
+
+/* Social proof review photos + highlights */
+.review-highlights{
+  display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-12);
+  margin: var(--s-24) 0 var(--s-32);
+}
+.review-highlights .rh{
+  aspect-ratio: 1/1; position:relative; overflow:hidden; cursor:pointer;
+  background: var(--bone);
+}
+.review-highlights .rh img{ width:100%; height:100%; object-fit:cover; transition: transform 500ms var(--ease); }
+.review-highlights .rh:hover img{ transform: scale(1.05); }
+.review-highlights .rh::after{
+  content:"★★★★★"; position:absolute; left:10px; bottom:8px; color: var(--ivory);
+  font-size: var(--t-12); text-shadow: 0 1px 4px rgba(0,0,0,0.4); letter-spacing:2px;
+}
+@media (max-width: 720px){ .review-highlights{ grid-template-columns: repeat(3,1fr); } }
+
+.review-row.has-photos{
+  grid-template-columns: 180px 1fr;
+}
+.review-row .rev-photos{
+  display:flex; gap:6px; margin-top: var(--s-12);
+}
+.review-row .rev-photos img{
+  width: 56px; height: 56px; object-fit:cover; border-radius: 2px;
+}
+.review-row .verified-badge{
+  display:inline-flex; align-items:center; gap:4px;
+  font-size: var(--t-12); color: var(--moss);
+  margin-left: 6px;
+}
+.review-row .verified-badge svg{ width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2; }
+.review-highlight-quote{
+  grid-column: 1/-1;
+  padding: var(--s-24); border-left: 2px solid var(--terracotta);
+  margin-bottom: var(--s-32);
+  font-family:'Fraunces',serif; font-size: var(--t-25); font-style:italic;
+  color: var(--ink); background: #FBF8F1;
+}
+.review-highlight-quote cite{ display:block; font-size: var(--t-14); color: var(--taupe); font-style:normal; margin-top: 8px; font-family:'Inter',sans-serif; }
+
+/* Bundle / Frequently bought together */
+.bundle-block{
+  margin: var(--s-48) 0; padding: var(--s-32);
+  border: 1px solid var(--line); background: var(--white);
+}
+.bundle-block h3{ font-family:'Fraunces',serif; font-size: var(--t-25); font-weight:400; margin-bottom: var(--s-24); }
+.bundle-items{
+  display:flex; align-items:center; gap: var(--s-16); flex-wrap:wrap; margin-bottom: var(--s-24);
+}
+.bundle-items .bundle-p{
+  flex: 1 1 120px; max-width:160px; text-align:center;
+}
+.bundle-items .bundle-p img{ aspect-ratio: 1/1; object-fit:cover; margin-bottom:8px; }
+.bundle-items .bundle-p strong{ display:block; font-size: var(--t-12); font-weight:500; }
+.bundle-items .bundle-p span{ font-size: var(--t-12); color: var(--taupe); }
+.bundle-items .plus{ font-family:'Fraunces',serif; font-size: var(--t-25); color: var(--taupe); }
+.bundle-cta{
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap: var(--s-16);
+  padding-top: var(--s-16); border-top:1px solid var(--line);
+}
+.bundle-cta .bundle-price{ font-family:'Fraunces',serif; font-size: var(--t-25); }
+.bundle-cta .bundle-price s{ color: var(--taupe-soft); font-size: var(--t-16); margin-right: 8px; }
+.bundle-cta .bundle-price .save{ color: var(--terracotta); font-size: var(--t-14); display:block; font-family:'Inter',sans-serif; }
+
+/* Q&A section */
+.qa-block{ margin: var(--s-48) 0; max-width: 800px; }
+.qa-block h3{ font-family:'Fraunces',serif; font-size: var(--t-31); font-weight:400; margin-bottom: var(--s-24); }
+.qa-item{
+  display:grid; grid-template-columns: 28px 1fr; gap: var(--s-12);
+  padding: var(--s-16) 0; border-bottom:1px solid var(--line);
+}
+.qa-item .q-letter{ font-family:'Fraunces',serif; font-size: var(--t-20); color: var(--terracotta); font-weight:500; line-height:1.2; }
+.qa-item .q-body strong{ font-weight:500; display:block; margin-bottom:6px; }
+.qa-item .q-body .q-meta{ font-size: var(--t-12); color: var(--taupe); margin-bottom: 6px; }
+.qa-item .q-body p{ font-size: var(--t-14); color: var(--ink-soft); }
+
+/* Live sales popup */
+.live-pop{
+  position: fixed; left: var(--s-16); bottom: var(--s-24);
+  max-width: 320px;
+  background: var(--white); color: var(--ink);
+  border: 1px solid var(--line);
+  box-shadow: var(--elev-2);
+  padding: var(--s-12);
+  display: grid; grid-template-columns: 44px 1fr auto; gap: var(--s-12); align-items:center;
+  z-index: 200;
+  transform: translateX(-120%) ; opacity:0;
+  transition: transform 520ms var(--ease), opacity 520ms var(--ease);
+  border-radius: var(--r-2);
+}
+.live-pop.is-on{ transform: translateX(0); opacity:1; }
+.live-pop img{ width:44px; height:44px; object-fit:cover; }
+.live-pop .lp-body strong{ display:block; font-size: var(--t-14); font-weight:500; }
+.live-pop .lp-body span{ font-size: var(--t-12); color: var(--taupe); }
+.live-pop .lp-close{ color: var(--taupe); font-size: 18px; padding: 4px; }
+@media (max-width: 720px){ .live-pop{ left: 8px; right: 8px; max-width: none; bottom: 70px; } }
+
+/* Activity ticker */
+.activity-ticker{
+  display:flex; align-items:center; gap: 8px;
+  font-size: var(--t-12); color: var(--taupe);
+  padding: 8px var(--s-12); border:1px solid var(--line);
+  background: var(--white); overflow:hidden; white-space:nowrap;
+  margin: var(--s-16) 0;
+}
+.activity-ticker .at-names{
+  display:inline-block; animation: slideTicker 28s linear infinite;
+}
+@keyframes slideTicker{ from{ transform: translateX(0); } to{ transform: translateX(-50%); } }
+
+/* Express pay (checkout) */
+.express-pay{
+  display:grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-8);
+  margin-bottom: var(--s-24);
+}
+.express-pay button{
+  height: 48px; border:1px solid var(--line); background: var(--white);
+  font-weight:500; font-size: var(--t-14);
+  display:flex; align-items:center; justify-content:center; gap: 8px;
+  transition: transform var(--t-fast) var(--ease), border-color var(--t-fast);
+}
+.express-pay button:hover{ border-color: var(--ink); transform: translateY(-1px); }
+.express-pay .ep-apple{ background: var(--ink); color: var(--ivory); border-color: var(--ink); }
+.express-pay .ep-apple:hover{ background:#000; }
+.express-pay .ep-google{ background: var(--white); color: var(--ink); }
+.express-pay .ep-pix{ background: #00B97F; color:#fff; border-color:#00B97F; }
+.express-pay-divider{
+  display:flex; align-items:center; gap: var(--s-12);
+  color: var(--taupe); font-size: var(--t-12); letter-spacing: 0.16em;
+  text-transform: uppercase; margin: var(--s-24) 0;
+}
+.express-pay-divider::before,.express-pay-divider::after{
+  content:""; flex:1; height:1px; background: var(--line);
+}
+
+/* What happens next */
+.next-steps{
+  margin-top: var(--s-32); padding: var(--s-16);
+  border: 1px solid var(--line); background: #FBF8F1;
+}
+.next-steps h4{ font-family:'Fraunces',serif; font-size: var(--t-16); font-weight:500; margin-bottom: 8px; }
+.next-steps ol{ display:grid; gap: 6px; }
+.next-steps li{ font-size: var(--t-12); color: var(--ink-soft); padding-left: 20px; position:relative; }
+.next-steps li::before{
+  content: counter(list-item) ".";
+  position:absolute; left:0; color: var(--terracotta); font-family:'Fraunces',serif; font-weight:500;
+}
+
+/* Mobile bottom nav */
+.bottom-nav{
+  display:none;
+  position: fixed; left:0; right:0; bottom:0;
+  background: rgba(244,241,236,0.96); backdrop-filter: blur(16px);
+  border-top: 1px solid var(--line);
+  z-index: 90;
+  padding: 6px calc(env(safe-area-inset-left) + 8px) calc(env(safe-area-inset-bottom) + 6px);
+}
+.bottom-nav__grid{
+  display:grid; grid-template-columns: repeat(5, 1fr);
+}
+.bottom-nav a{
+  display:flex; flex-direction:column; align-items:center; gap: 2px;
+  padding: 6px 4px; color: var(--ink);
+  font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  position:relative;
+}
+.bottom-nav svg{ width: 22px; height: 22px; stroke: currentColor; fill:none; stroke-width: 1.5; }
+.bottom-nav a.is-active{ color: var(--terracotta); }
+.bottom-nav .bn-badge{
+  position:absolute; top:2px; right: calc(50% - 20px);
+  background: var(--terracotta); color: var(--ivory);
+  font-size: 9px; width: 16px; height:16px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+@media (max-width: 720px){
+  .bottom-nav{ display:block; }
+  body{ padding-bottom: 62px; }
+  .sticky-atc{ bottom: 62px; }
+  .live-pop{ bottom: 74px; }
+}
+
+/* PLP badges overlays on cards */
+.card__badges .tag-sold{
+  background: var(--ink); color: var(--ivory);
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 8px;
+}
+.card__badges .tag-left{
+  background: var(--terracotta); color: var(--ivory);
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 8px;
+}
+.card__badges .tag-team{
+  background: var(--ivory); color: var(--ink); border:1px solid var(--ink);
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 8px;
+}
+
+/* Gift add-ons */
+.gift-addons{
+  display:grid; gap: 8px; margin: var(--s-16) 0;
+  padding: var(--s-16); border:1px solid var(--line); background: var(--white);
+}
+.gift-addons h4{ font-family:'Fraunces',serif; font-size: var(--t-14); font-weight:500; margin-bottom:6px; }
+.gift-addons label{
+  display:flex; align-items:center; gap: 10px;
+  font-size: var(--t-12); color: var(--ink-soft); cursor: pointer;
+  padding: 6px 0; border-top:1px solid var(--line);
+}
+.gift-addons label:first-of-type{ border-top:0; }
+.gift-addons label input{ accent-color: var(--terracotta); }
+.gift-addons label .price{ margin-left:auto; color: var(--taupe); }
+
+/* Tiered progress bar */
+.cart-tiers{
+  position: relative; padding: var(--s-12) 0 26px;
+  border-bottom:1px solid var(--line); margin-bottom: var(--s-16);
+}
+.cart-tiers .tier-label{ font-size: var(--t-12); color: var(--taupe); margin-bottom: 8px; }
+.cart-tiers .tier-label strong{ color: var(--ink); font-weight:500; }
+.cart-tiers .tier-track{
+  height:6px; background: var(--bone); border-radius: var(--r-pill);
+  position:relative;
+}
+.cart-tiers .tier-fill{
+  height:100%; background: linear-gradient(90deg, var(--moss), var(--terracotta));
+  border-radius: var(--r-pill); width: var(--tw, 0%); transition: width 520ms var(--ease);
+}
+.cart-tiers .tier-dots{
+  position: absolute; left:0; right:0; top: calc(var(--s-12) + 10px);
+  display:flex; justify-content:space-between;
+}
+.cart-tiers .tier-dot{
+  display:flex; flex-direction:column; align-items:center; gap: 4px;
+  transform: translateY(-6px); font-size: 10px; letter-spacing: 0.06em; color: var(--taupe);
+  text-transform: uppercase; text-align:center;
+}
+.cart-tiers .tier-dot .mark{
+  width:12px; height:12px; border-radius:50%; background: var(--bone); border:2px solid var(--white);
+  box-shadow: 0 0 0 1px var(--line);
+}
+.cart-tiers .tier-dot.is-on .mark{ background: var(--moss); box-shadow: 0 0 0 1px var(--moss); }
+.cart-tiers .tier-dot.is-on{ color: var(--ink); }
+
+/* Buying-now ticker header pill alignment */
+.header__kpis{
+  display:flex; gap: var(--s-12); align-items:center;
+  justify-content:center; padding: 4px 0;
+  font-size: var(--t-12); color: var(--taupe);
+}
+@media (max-width: 720px){ .header__kpis{ display:none; } }
+
+/* Sticky ATC upgrade */
+.sticky-atc{
+  box-shadow: 0 -12px 24px -12px rgba(26,25,22,0.18);
+}
+.sticky-atc .sticky-meta{
+  display:flex; flex-direction:column;
+}
+.sticky-atc .sticky-meta small{ font-size: 10px; color: var(--terracotta); letter-spacing: 0.08em; text-transform: uppercase; }
+
 </style>
 </head>
 <body>
@@ -1223,6 +1637,10 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
       <small>EST. 2024</small>
     </a>
     <div class="header__actions">
+      <span class="people-online" aria-live="polite" title="Pessoas navegando agora">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="txt"><strong id="people-online-n">142</strong> online</span>
+      </span>
       <button class="icon-btn" aria-label="Buscar" data-open="search">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
       </button>
@@ -1590,15 +2008,36 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
           <span id="pdp-reviews">(128 avaliações)</span>
         </div>
 
+        <!-- Urgency stack -->
+        <div class="urgency-stack" id="pdp-urgency">
+          <div class="urgency-item">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span><strong id="pdp-viewers">12</strong> pessoas estão vendo este produto agora</span>
+          </div>
+          <div class="urgency-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z"/><path d="M12 7v5l3 2"/></svg>
+            <span><strong id="pdp-sold24">47</strong> unidades vendidas nas últimas 24h</span>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:var(--t-12); color:var(--taupe); margin-bottom:6px;">
+              <span>Estoque restante</span>
+              <strong id="pdp-stock-n" style="color:var(--terracotta-deep);">— unidades</strong>
+            </div>
+            <div class="stock-bar" id="pdp-stock-bar" style="--stock-w: 30%;"></div>
+          </div>
+        </div>
+
         <div class="pdp__variants" id="pdp-variants"></div>
 
-        <div class="pdp__ctas">
-          <button class="btn btn-primary btn-block" id="pdp-add">Adicionar — <span id="pdp-atc-price">R$ 280</span></button>
-          <button class="icon-btn" aria-label="Favoritar" style="border:1px solid var(--ink); width:48px; height:48px; border-radius:0;">
-            <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
-          </button>
+        <div class="pdp__ctas cta-cluster">
+          <button class="btn btn-primary btn-block" id="pdp-add">Adicionar ao carrinho — <span id="pdp-atc-price">R$ 280</span></button>
+          <div class="cta-micro">
+            <span><svg viewBox="0 0 24 24"><path d="M3 7h13l4 4v6h-4"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> Frete grátis acima de R$ 420</span>
+            <span><svg viewBox="0 0 24 24"><path d="M4 7h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V7z"/><path d="M9 11l2 2 4-4"/></svg> 30 dias de garantia</span>
+            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg> Envio em 24h úteis</span>
+          </div>
         </div>
-        <p style="font-size:var(--t-12); color:var(--taupe); margin-bottom:var(--s-24);">✦ Em estoque · envio em 1 dia útil</p>
+        <p style="font-size:var(--t-12); color:var(--taupe); margin:var(--s-12) 0 var(--s-24); text-align:center;">✦ Compra segura · Pix com 5% OFF · Parcelamento em até 10x sem juros</p>
 
         <div class="pdp__benefits">
           <div><svg viewBox="0 0 24 24"><path d="M3 7h13l4 4v6h-4"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg> Frete grátis acima de R$ 420</div>
@@ -1636,6 +2075,94 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
       </aside>
     </section>
 
+    <!-- Guarantee box -->
+    <section class="guarantee-box reveal">
+      <div class="seal">30<br>DIAS</div>
+      <div>
+        <h4>Se não for o que você imaginou, devolvemos seu dinheiro.</h4>
+        <p>Use em casa por 30 dias. Se não fizer sentido no seu cotidiano, devolvemos 100% — sem letra miúda, sem enrolação. Postagem por nossa conta.</p>
+      </div>
+    </section>
+
+    <!-- Why choose -->
+    <section class="why-block reveal">
+      <h3 class="sh__title">Por que esta peça entra no seu cotidiano — e fica.</h3>
+      <div class="why-item">
+        <span class="num">01</span>
+        <div><h4>Produção em lote pequeno</h4><p>Cada lote é acompanhado por uma pessoa — não uma linha. Se algo sai fora do padrão, não chega até você.</p></div>
+      </div>
+      <div class="why-item">
+        <span class="num">02</span>
+        <div><h4>Matéria-prima que envelhece bem</h4><p>Linho que amacia, cerâmica que absorve, couro que ganha pátina. Peças que ficam melhores depois de meses de uso.</p></div>
+      </div>
+      <div class="why-item">
+        <span class="num">03</span>
+        <div><h4>Envio considerado</h4><p>Caixa reciclada sem plástico, cartão escrito à mão, embalagem pensada como parte do objeto — não como descarte.</p></div>
+      </div>
+      <div class="why-item">
+        <span class="num">04</span>
+        <div><h4>Garantia real de 30 dias</h4><p>Troca ou devolução sem letra miúda. Se não ficou como você esperava, o ônus é nosso.</p></div>
+      </div>
+    </section>
+
+    <!-- Sensory block -->
+    <section class="sensory-block reveal">
+      <img src="https://images.unsplash.com/photo-1507120878965-54b2d3939100?auto=format&fit=crop&w=900&q=80" alt="Detalhe sensorial do produto em uso" loading="lazy" />
+      <div>
+        <span class="eyebrow" style="color:#CBB99E;">O que você vai sentir</span>
+        <h3 id="sensory-title">No primeiro uso, em um mês, em seis.</h3>
+        <ul id="sensory-list">
+          <li><span class="k">Primeiro uso</span><span>O cuidado chega antes do produto — embalagem pensada, cartão à mão, peça protegida.</span></li>
+          <li><span class="k">Primeira semana</span><span>A peça começa a ocupar um lugar fixo na casa. Você percebe quando está fora dele.</span></li>
+          <li><span class="k">Primeiro mês</span><span>O material começa a responder ao uso — amacia, ganha marca, vira seu.</span></li>
+          <li><span class="k">Seis meses</span><span>É parte do ritual. Você volta ao site pensando em combinar com outra peça.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Comparison vs common -->
+    <section class="vs-block reveal">
+      <h3>Comum <em style="font-family:'Fraunces',serif; font-style:italic; color:var(--taupe);">vs.</em> MAISON VELA.</h3>
+      <div class="vs-grid">
+        <div class="vs-head"></div>
+        <div class="vs-head">Marcas comuns</div>
+        <div class="vs-head">MAISON VELA</div>
+
+        <div class="vs-row-label"><strong>Produção</strong></div>
+        <div class="vs-them">Linhas de produção em massa, sem rastreabilidade</div>
+        <div class="vs-ours">Lotes pequenos, artesãos identificados por peça</div>
+
+        <div class="vs-row-label"><strong>Matéria-prima</strong></div>
+        <div class="vs-them">Fibras sintéticas que pilotam em um ano</div>
+        <div class="vs-ours">Materiais naturais que amaciam e ganham pátina</div>
+
+        <div class="vs-row-label"><strong>Embalagem</strong></div>
+        <div class="vs-them">Plástico descartável, caixa genérica</div>
+        <div class="vs-ours">Caixa reciclada, zero plástico, cartão à mão</div>
+
+        <div class="vs-row-label"><strong>Garantia</strong></div>
+        <div class="vs-them">7 dias, letra miúda, frete da devolução no cliente</div>
+        <div class="vs-ours">30 dias, troca simples, postagem por nossa conta</div>
+
+        <div class="vs-row-label"><strong>Vida útil</strong></div>
+        <div class="vs-them">Objeto que envelhece mal e vira descarte</div>
+        <div class="vs-ours">Peça que fica melhor com o uso — pensada para durar</div>
+      </div>
+    </section>
+
+    <!-- Bundle: frequently bought together -->
+    <section class="bundle-block reveal" id="pdp-bundle">
+      <h3>Comprados juntos — compõem o ritual.</h3>
+      <div class="bundle-items" id="bundle-items"></div>
+      <div class="bundle-cta">
+        <div class="bundle-price">
+          <s id="bundle-old">R$ 0</s><strong id="bundle-new">R$ 0</strong>
+          <span class="save" id="bundle-save">Economize R$ 0 (10% OFF no combo)</span>
+        </div>
+        <button class="btn btn-primary" id="bundle-add">Adicionar os três · <span id="bundle-add-p">R$ 0</span></button>
+      </div>
+    </section>
+
     <!-- Reviews -->
     <section class="reviews-pdp">
       <div class="reviews-pdp__head">
@@ -1650,17 +2177,86 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
           </div>
         </div>
       </div>
-      <div class="review-row">
-        <div class="meta"><strong>Beatriz M.</strong>Verificado · SP<br>★★★★★</div>
-        <div><p><strong style="font-family:'Fraunces',serif; font-weight:400;">Discreto e constante.</strong></p><p>Não é uma vela "perfume forte" — é o oposto. Ela perfuma o fundo da casa sem anunciar. Comprei três vezes em oito meses.</p></div>
+      <!-- Highlighted review quote -->
+      <div class="review-highlight-quote">
+        "Comprei a primeira como presente. Um mês depois, comprei a segunda — para mim. Essa é a curva."
+        <cite>— Helena R., arquiteta · comprou 4x</cite>
       </div>
-      <div class="review-row">
-        <div class="meta"><strong>João L.</strong>Verificado · Porto<br>★★★★★</div>
-        <div><p><strong style="font-family:'Fraunces',serif; font-weight:400;">Embalagem à altura.</strong></p><p>O cuidado com a caixa já entrega o padrão. A vela mesma é excelente — queima limpa, sem fuligem, e o vidro ficou como objeto depois.</p></div>
+
+      <!-- Review photo highlights -->
+      <div class="review-highlights" aria-label="Fotos de clientes">
+        <div class="rh"><img src="https://images.unsplash.com/photo-1522444195799-478538b28823?auto=format&fit=crop&w=500&q=70" alt="Cliente Beatriz" loading="lazy"/></div>
+        <div class="rh"><img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=500&q=70" alt="Cliente João" loading="lazy"/></div>
+        <div class="rh"><img src="https://images.unsplash.com/photo-1504198266287-1659872e6590?auto=format&fit=crop&w=500&q=70" alt="Cliente Marta" loading="lazy"/></div>
+        <div class="rh"><img src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=500&q=70" alt="Cliente Helena" loading="lazy"/></div>
       </div>
-      <div class="review-row">
-        <div class="meta"><strong>Marta F.</strong>Verificado · Lisboa<br>★★★★☆</div>
-        <div><p><strong style="font-family:'Fraunces',serif; font-weight:400;">Duração real.</strong></p><p>Acendi em média 2h por noite e durou uns dois meses — coerente com o que promete. Aroma um pouco mais suave do que esperava, mas gostei.</p></div>
+
+      <div class="review-row has-photos">
+        <div class="meta">
+          <strong>Beatriz M.</strong>
+          <span class="verified-badge"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 10-11"/></svg> Verificado</span>
+          · SP<br>★★★★★
+          <div class="rev-photos"><img src="https://images.unsplash.com/photo-1616627988533-35c82b7b6f5c?auto=format&fit=crop&w=200&q=70" alt=""/><img src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=200&q=70" alt=""/></div>
+        </div>
+        <div>
+          <p><strong style="font-family:'Fraunces',serif; font-weight:400; font-size:var(--t-20);">Discreto e constante.</strong></p>
+          <p style="color:var(--ink-soft);">Não é uma vela "perfume forte" — é o oposto. Ela perfuma o fundo da casa sem anunciar. Comprei três vezes em oito meses. Deixei uma queimando durante um jantar e dois convidados pediram o nome. O ritual de acender virou parte do fim de tarde. Vale cada centavo.</p>
+          <p style="font-size:var(--t-12); color:var(--taupe); margin-top:8px;">há 3 dias · 💬 4 comentários · ♡ 23 útil</p>
+        </div>
+      </div>
+      <div class="review-row has-photos">
+        <div class="meta">
+          <strong>João L.</strong>
+          <span class="verified-badge"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 10-11"/></svg> Verificado</span>
+          · Porto<br>★★★★★
+          <div class="rev-photos"><img src="https://images.unsplash.com/photo-1602178506153-472ef4810278?auto=format&fit=crop&w=200&q=70" alt=""/></div>
+        </div>
+        <div>
+          <p><strong style="font-family:'Fraunces',serif; font-weight:400; font-size:var(--t-20);">Embalagem à altura.</strong></p>
+          <p style="color:var(--ink-soft);">O cuidado com a caixa já entrega o padrão. A vela mesma é excelente — queima limpa, sem fuligem, e o vidro ficou como objeto depois. Tenho um hábito meio chato de comparar com velas francesas que trago quando viajo. Essa senta na mesma mesa, literalmente.</p>
+          <p style="font-size:var(--t-12); color:var(--taupe); margin-top:8px;">há 1 semana · ♡ 19 útil</p>
+        </div>
+      </div>
+      <div class="review-row has-photos">
+        <div class="meta">
+          <strong>Marta F.</strong>
+          <span class="verified-badge"><svg viewBox="0 0 24 24"><path d="M5 12l5 5 10-11"/></svg> Verificado</span>
+          · Lisboa<br>★★★★☆
+        </div>
+        <div>
+          <p><strong style="font-family:'Fraunces',serif; font-weight:400; font-size:var(--t-20);">Duração real.</strong></p>
+          <p style="color:var(--ink-soft);">Acendi em média 2h por noite e durou uns dois meses — coerente com o que promete. Aroma um pouco mais suave do que esperava, mas gostei. Dei 4 estrelas porque esperava mais presença, mas já comprei novamente.</p>
+          <p style="font-size:var(--t-12); color:var(--taupe); margin-top:8px;">há 2 semanas · ♡ 11 útil</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Q&A Amazon-style -->
+    <section class="qa-block reveal">
+      <h3>Perguntas de clientes · respondidas pela equipe</h3>
+      <div class="qa-item">
+        <div class="q-letter">P</div>
+        <div class="q-body"><strong>A fragrância "enjoa" em um ambiente pequeno?</strong><div class="q-meta">Gabriela · há 5 dias · 12 acharam útil</div></div>
+      </div>
+      <div class="qa-item">
+        <div class="q-letter">R</div>
+        <div class="q-body"><span style="color:var(--taupe); font-size:var(--t-12);">MAISON VELA · perfumista da casa</span><p>Especificamente pensamos a Ardèche para salas a partir de 12m². Em ambientes menores (como escritórios de 8–10m²), recomendamos alternar 2h de uso e 1h de repouso — a composição tem bastante cedro de fundo que dispersa bem mas pode saturar se queimada por longos períodos.</p></div>
+      </div>
+      <div class="qa-item">
+        <div class="q-letter">P</div>
+        <div class="q-body"><strong>Vocês fazem entrega internacional? Moro em Lisboa.</strong><div class="q-meta">João · há 2 semanas · 8 acharam útil</div></div>
+      </div>
+      <div class="qa-item">
+        <div class="q-letter">R</div>
+        <div class="q-body"><span style="color:var(--taupe); font-size:var(--t-12);">MAISON VELA · equipe</span><p>Sim. Enviamos para toda Europa, EUA, Canadá e Austrália. Frete a partir de €24 (Europa) — o prazo é de 5–12 dias úteis. Para velas, há tratamento especial de embalagem para resistir às variações térmicas do trajeto.</p></div>
+      </div>
+      <div class="qa-item">
+        <div class="q-letter">P</div>
+        <div class="q-body"><strong>Posso usar o vidro depois que a vela terminar? Como limpo a cera residual?</strong><div class="q-meta">Helena · há 1 mês · 27 acharam útil</div></div>
+      </div>
+      <div class="qa-item">
+        <div class="q-letter">R</div>
+        <div class="q-body"><span style="color:var(--taupe); font-size:var(--t-12);">MAISON VELA · equipe</span><p>Sim — o vidro foi desenhado para reuso. Para limpar: coloque em freezer por 2h e a cera solta em bloco. Se sobrar, água morna com detergente neutro resolve. Muitas clientas usam como copo ou vaso pequeno.</p></div>
       </div>
     </section>
 
@@ -1689,8 +2285,11 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
   <!-- Sticky ATC mobile -->
   <div class="sticky-atc">
     <div class="row container">
-      <strong id="sticky-price">R$ 280</strong>
-      <button class="btn btn-primary" id="sticky-add">Adicionar</button>
+      <div class="sticky-meta">
+        <small id="sticky-urg">✦ Últimas unidades</small>
+        <strong id="sticky-price">R$ 280</strong>
+      </div>
+      <button class="btn btn-primary" id="sticky-add" style="min-height:52px; flex:1; margin-left:12px;">Adicionar ao carrinho</button>
     </div>
   </div>
 </section>
@@ -1744,6 +2343,16 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
 
     <div class="checkout-wrap">
       <form id="checkout-form" novalidate>
+
+        <!-- Express pay shortcut -->
+        <section style="padding-bottom: var(--s-24); border-bottom: 1px solid var(--line); margin-bottom: var(--s-24);">
+          <div class="express-pay">
+            <button type="button" class="ep-apple" data-express="apple"> Pay</button>
+            <button type="button" class="ep-google" data-express="google">G Pay</button>
+            <button type="button" class="ep-pix" data-express="pix">Pix · 5% OFF</button>
+          </div>
+          <div class="express-pay-divider">ou preencha abaixo</div>
+        </section>
 
         <section style="padding-bottom: var(--s-32); border-bottom: 1px solid var(--line); margin-bottom: var(--s-32);">
           <h2 style="font-family:'Fraunces',serif; font-size:var(--t-25); margin-bottom:var(--s-16); font-weight:400;">Identificação</h2>
@@ -1805,11 +2414,13 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
             </div>
             <div class="field"><select><option>1x de R$ 0,00</option><option>2x sem juros</option><option>3x sem juros</option><option>10x sem juros</option></select><label class="has-value">Parcelamento</label></div>
           </div>
-          <button type="submit" class="btn btn-primary btn-block" style="margin-top:var(--s-16); min-height:56px; font-size:var(--t-14);">Finalizar pedido ✦</button>
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top:var(--s-16); min-height:60px; font-size:var(--t-14); letter-spacing:0.16em;">Finalizar pedido seguro ✦</button>
+          <p style="text-align:center; font-size:var(--t-12); color:var(--taupe); margin-top:8px;">Ao clicar, você confirma a compra. <strong style="color:var(--ink);">Sem cobrança de surpresa</strong> — o valor acima é exatamente o que sai do seu cartão.</p>
           <div class="trust-strip">
             <span>🔒 SSL 256 bits</span>
             <span>✦ Antifraude ativo</span>
             <span>✦ Dados criptografados</span>
+            <span>✓ PCI-DSS</span>
           </div>
         </section>
       </form>
@@ -1818,7 +2429,16 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
         <h3>Resumo do pedido</h3>
         <div id="checkout-items"></div>
         <div style="padding-top: var(--s-16); border-top:1px solid var(--line); margin-top:var(--s-12);" id="checkout-totals"></div>
-        <p style="font-size:var(--t-12); color:var(--taupe); margin-top:var(--s-16); padding-top:var(--s-16); border-top:1px solid var(--line);">Presente? Há opção de embrulho e cartão escrito à mão no próximo passo.</p>
+        <div class="next-steps">
+          <h4>O que acontece depois</h4>
+          <ol>
+            <li>Você recebe confirmação por e-mail em 2 minutos</li>
+            <li>Preparamos seu pedido no atelier em 1 dia útil</li>
+            <li>Você acompanha o envio com código de rastreio</li>
+            <li>Se algo não for o que imaginou: 30 dias de troca, postagem por nossa conta</li>
+          </ol>
+        </div>
+        <p style="font-size:var(--t-12); color:var(--taupe); margin-top:var(--s-16); padding-top:var(--s-16); border-top:1px solid var(--line);">✦ Já escolheu embrulho e cartão à mão? Eles aparecem no resumo ao voltar ao carrinho.</p>
       </aside>
     </div>
   </div>
@@ -2009,11 +2629,21 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
     </button>
   </div>
   <div class="drawer__body">
-    <div class="cart-progress" id="drawer-progress">
-      <span id="drawer-progress-text">Faltam R$ 420 para frete grátis</span>
-      <div class="cart-progress__bar"></div>
+    <div class="cart-tiers" id="drawer-tiers">
+      <div class="tier-label" id="drawer-tier-label">Faltam <strong>R$ 420</strong> para frete grátis</div>
+      <div class="tier-track"><div class="tier-fill" style="--tw:0%;"></div></div>
+      <div class="tier-dots">
+        <div class="tier-dot" data-tier="ship"><span class="mark"></span>Frete grátis</div>
+        <div class="tier-dot" data-tier="gift"><span class="mark"></span>+ brinde</div>
+        <div class="tier-dot" data-tier="off"><span class="mark"></span>10% OFF</div>
+      </div>
     </div>
     <div id="drawer-items"></div>
+    <div class="gift-addons" id="drawer-addons" style="display:none;">
+      <h4>Toque final</h4>
+      <label><input type="checkbox" id="addon-wrap"/> Embrulho MAISON VELA (caixa em linho + lacre de cera) <span class="price">Grátis</span></label>
+      <label><input type="checkbox" id="addon-card"/> Cartão escrito à mão com sua mensagem <span class="price">Grátis</span></label>
+    </div>
     <div id="drawer-empty" style="display:none; text-align:center; padding: var(--s-48) 0;">
       <div style="font-family:'Fraunces',serif; font-size:var(--t-25); margin-bottom:8px;">Seu carrinho está silencioso.</div>
       <p style="color:var(--taupe); margin-bottom:var(--s-24);">Procure algo para levar para casa.</p>
@@ -2022,7 +2652,8 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
   </div>
   <div class="drawer__foot" id="drawer-foot">
     <div class="cart-totals" id="drawer-totals"></div>
-    <a href="#/checkout" class="btn btn-primary btn-block" data-close>Finalizar compra</a>
+    <a href="#/checkout" class="btn btn-primary btn-block" data-close>Finalizar compra ✦</a>
+    <p style="text-align:center; font-size:10px; color:var(--taupe); margin-top:8px; letter-spacing:0.14em; text-transform:uppercase;">🔒 Pagamento seguro · 30 dias de troca</p>
     <a href="#/cart" class="btn btn-quiet" data-close style="display:block; text-align:center; margin-top:10px;">Ver carrinho completo</a>
   </div>
 </aside>
@@ -2105,6 +2736,43 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
   <img src="" alt="" id="toast-img" />
   <div><strong id="toast-title">Adicionado</strong><span id="toast-sub">Ver no carrinho →</span></div>
 </div>
+
+<!-- LIVE SALES POP-UP -->
+<div class="live-pop" id="live-pop" role="status" aria-live="polite">
+  <img src="" alt="" id="lp-img"/>
+  <div class="lp-body">
+    <strong id="lp-name">Beatriz, SP</strong>
+    <span id="lp-sub">comprou Vela Ardèche · há 4 min</span>
+  </div>
+  <button class="lp-close" aria-label="Fechar" onclick="document.getElementById('live-pop').classList.remove('is-on');">×</button>
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="bottom-nav" aria-label="Navegação rápida">
+  <div class="bottom-nav__grid">
+    <a href="#/" data-bn="home">
+      <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a2 2 0 01-2 2h-3v-6h-6v6H6a2 2 0 01-2-2v-9z"/></svg>
+      Home
+    </a>
+    <a href="#/shop" data-bn="shop">
+      <svg viewBox="0 0 24 24"><path d="M4 7h16l-1 13a2 2 0 01-2 2H7a2 2 0 01-2-2L4 7z"/><path d="M9 7a3 3 0 016 0"/></svg>
+      Loja
+    </a>
+    <a href="#" data-open="search" data-bn="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      Buscar
+    </a>
+    <a href="#" data-open="cart" data-bn="cart">
+      <svg viewBox="0 0 24 24"><path d="M6 7h12l-1 11a2 2 0 01-2 2H9a2 2 0 01-2-2L6 7z"/><path d="M9 7a3 3 0 016 0"/></svg>
+      <span class="bn-badge" id="bn-cart-badge" style="display:none;">0</span>
+      Carrinho
+    </a>
+    <a href="#/account" data-bn="account">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+      Conta
+    </a>
+  </div>
+</nav>
 
 <!-- ============================================================
      SCRIPT
@@ -2211,12 +2879,32 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
   };
 
   /* -------------------- STATE -------------------- */
+  const STORAGE_KEY = 'maisonvela_cart_v2';
+  const WISH_KEY = 'maisonvela_wish_v2';
   const state = {
-    cart: [],          // { id, qty, variantLabel }
+    cart: [],
     wishlist: [],
     freeShippingAt: 420,
+    giftAt: 640,
+    discountAt: 980,
     recentIds: [],
+    giftWrap: false,
+    handwrittenCard: false,
   };
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    if (saved && Array.isArray(saved.cart)) {
+      state.cart = saved.cart;
+      state.giftWrap = !!saved.giftWrap;
+      state.handwrittenCard = !!saved.handwrittenCard;
+    }
+    const wish = JSON.parse(localStorage.getItem(WISH_KEY) || 'null');
+    if (Array.isArray(wish)) state.wishlist = wish;
+  } catch(e){}
+  function persist(){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ cart: state.cart, giftWrap: state.giftWrap, handwrittenCard: state.handwrittenCard })); } catch(e){}
+    try { localStorage.setItem(WISH_KEY, JSON.stringify(state.wishlist)); } catch(e){}
+  }
 
   const money = (n) => 'R$ ' + n.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
   const byId = (id) => PRODUCTS.find(p => p.id === id);
@@ -2359,6 +3047,53 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
     const recent = state.recentIds.map(byId).filter(Boolean);
     renderGrid('#pdp-recent', recent.length ? recent : PRODUCTS.slice(0,4));
 
+    // Urgency: live viewers + sold 24h + stock
+    const pdpViewers = 8 + Math.floor(Math.random()*18);
+    const sold24 = 12 + Math.floor(Math.random()*70);
+    document.getElementById('pdp-viewers').textContent = pdpViewers;
+    document.getElementById('pdp-sold24').textContent = sold24;
+    const stockShown = Math.max(2, p.stock);
+    document.getElementById('pdp-stock-n').textContent = `Apenas ${stockShown} unidades`;
+    const pct = Math.min(95, Math.max(8, stockShown * 6));
+    document.getElementById('pdp-stock-bar').style.setProperty('--stock-w', pct + '%');
+    const sUrg = document.getElementById('sticky-urg');
+    if (sUrg) sUrg.textContent = stockShown <= 6 ? `✦ Últimas ${stockShown} unidades` : `✦ Envio em 24h`;
+
+    // Decaying stock & oscillating viewers
+    if (window.__mvPdpTicker) clearInterval(window.__mvPdpTicker);
+    window.__mvPdpTicker = setInterval(() => {
+      const vEl = document.getElementById('pdp-viewers');
+      if (!vEl) return;
+      const cur = parseInt(vEl.textContent, 10) || pdpViewers;
+      const next = Math.max(4, Math.min(32, cur + (Math.random() < 0.5 ? -1 : 1)));
+      vEl.textContent = next;
+    }, 6500);
+
+    // Sensory title
+    const sensTitle = document.getElementById('sensory-title');
+    if (sensTitle) sensTitle.textContent = `${p.title} — no primeiro uso, em um mês, em seis.`;
+
+    // Bundle: this product + 2 related
+    const bundleSet = [p, ...relatedFinal.slice(0,2)];
+    const bItems = document.getElementById('bundle-items');
+    if (bItems) {
+      bItems.innerHTML = bundleSet.map((bp, i) => `
+        ${i>0 ? '<span class="plus">+</span>' : ''}
+        <div class="bundle-p">
+          <img src="${bp.img}" alt="${bp.title}" loading="lazy"/>
+          <strong>${bp.title}</strong>
+          <span>${money(bp.price)}</span>
+        </div>
+      `).join('');
+      const totalOld = bundleSet.reduce((s,x)=>s+x.price,0);
+      const totalNew = Math.round(totalOld * 0.9);
+      document.getElementById('bundle-old').textContent = money(totalOld);
+      document.getElementById('bundle-new').textContent = money(totalNew);
+      document.getElementById('bundle-save').textContent = `Economize ${money(totalOld-totalNew)} (10% OFF no combo)`;
+      document.getElementById('bundle-add-p').textContent = money(totalNew);
+      document.getElementById('bundle-add').onclick = () => { bundleSet.forEach(bp => addToCart(bp.id)); };
+    }
+
     // ATC bindings
     const addHandler = () => addToCart(p.id);
     document.getElementById('pdp-add').onclick = addHandler;
@@ -2372,6 +3107,10 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
   function injectProductSchema(p){
     const old = document.getElementById('ld-product');
     if (old) old.remove();
+    const oldFaq = document.getElementById('ld-faq');
+    if (oldFaq) oldFaq.remove();
+
+    const pvUntil = new Date(Date.now() + 1000*60*60*24*60).toISOString().slice(0,10);
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.id = 'ld-product';
@@ -2387,12 +3126,35 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
         "@type":"Offer",
         "price": p.price,
         "priceCurrency":"BRL",
+        "priceValidUntil": pvUntil,
         "availability": p.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-        "url":`https://maisonvela.example.com/product/${p.slug}`
+        "itemCondition":"https://schema.org/NewCondition",
+        "url":`https://maisonvela.example.com/product/${p.slug}`,
+        "seller":{ "@type":"Organization", "name":"MAISON VELA" }
       },
-      "aggregateRating":{ "@type":"AggregateRating", "ratingValue": p.rating, "reviewCount": p.reviews }
+      "aggregateRating":{ "@type":"AggregateRating", "ratingValue": p.rating, "reviewCount": p.reviews, "bestRating":5, "worstRating":1 },
+      "review":[
+        { "@type":"Review", "reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5}, "author":{"@type":"Person","name":"Beatriz M."}, "reviewBody":"Não é uma vela perfume forte — é o oposto. Ela perfuma o fundo da casa sem anunciar. Comprei três vezes em oito meses." },
+        { "@type":"Review", "reviewRating":{"@type":"Rating","ratingValue":5,"bestRating":5}, "author":{"@type":"Person","name":"João L."}, "reviewBody":"O cuidado com a caixa já entrega o padrão. A vela mesma é excelente — queima limpa, sem fuligem, e o vidro ficou como objeto depois." },
+        { "@type":"Review", "reviewRating":{"@type":"Rating","ratingValue":4,"bestRating":5}, "author":{"@type":"Person","name":"Marta F."}, "reviewBody":"Acendi em média 2h por noite e durou uns dois meses — coerente com o que promete. Aroma um pouco mais suave do que esperava, mas gostei." }
+      ]
     });
     document.head.appendChild(script);
+
+    // FAQPage schema
+    const faq = document.createElement('script');
+    faq.type = 'application/ld+json'; faq.id = 'ld-faq';
+    faq.textContent = JSON.stringify({
+      "@context":"https://schema.org", "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"Posso queimar por mais de 4 horas?","acceptedAnswer":{"@type":"Answer","text":"Não recomendamos. A cera superaquece e o aroma fica menos limpo. A dose certa é 2–3 horas por sessão."}},
+        {"@type":"Question","name":"O vidro pode ir na máquina de lavar?","acceptedAnswer":{"@type":"Answer","text":"Pode — lave com água morna depois de remover toda a cera. O vidro é feito para ser reutilizado (cai bem como copo ou vaso pequeno)."}},
+        {"@type":"Question","name":"Funciona para presente?","acceptedAnswer":{"@type":"Answer","text":"Sim. Oferecemos embrulho de presente gratuito com cartão escrito à mão — escolha no checkout."}},
+        {"@type":"Question","name":"Vocês fazem entrega internacional?","acceptedAnswer":{"@type":"Answer","text":"Sim. Enviamos para toda Europa, EUA, Canadá e Austrália. Frete a partir de €24 (Europa), prazo de 5–12 dias úteis."}},
+        {"@type":"Question","name":"Como é a garantia?","acceptedAnswer":{"@type":"Answer","text":"30 dias para troca ou devolução. Postagem por nossa conta. Sem letra miúda."}}
+      ]
+    });
+    document.head.appendChild(faq);
 
     // Breadcrumb schema
     const oldBc = document.getElementById('ld-bc');
@@ -2436,23 +3198,32 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
   function updateCartUI(){
     const subtotal = cartSubtotal();
     const count = state.cart.reduce((s,i) => s+i.qty, 0);
+    persist();
 
     // Badge
     const cb = document.getElementById('cart-badge');
     cb.textContent = count;
     cb.classList.toggle('is-visible', count > 0);
+    const bnCb = document.getElementById('bn-cart-badge');
+    if (bnCb){ bnCb.textContent = count; bnCb.style.display = count > 0 ? 'flex' : 'none'; }
 
     // Drawer items
     const drawerItems = document.getElementById('drawer-items');
     const drawerFoot = document.getElementById('drawer-foot');
     const drawerEmpty = document.getElementById('drawer-empty');
+    const drawerAddons = document.getElementById('drawer-addons');
+    const drawerTiers = document.getElementById('drawer-tiers');
     if (!state.cart.length){
       drawerItems.innerHTML = '';
       drawerFoot.style.display = 'none';
       drawerEmpty.style.display = 'block';
+      if (drawerAddons) drawerAddons.style.display = 'none';
+      if (drawerTiers) drawerTiers.style.display = 'none';
     } else {
       drawerEmpty.style.display = 'none';
       drawerFoot.style.display = 'block';
+      if (drawerAddons) drawerAddons.style.display = 'grid';
+      if (drawerTiers) drawerTiers.style.display = 'block';
       drawerItems.innerHTML = state.cart.map((it, idx) => {
         const p = byId(it.id);
         return `
@@ -2473,21 +3244,45 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
       }).join('');
     }
 
-    // Drawer totals
-    const ship = subtotal >= state.freeShippingAt ? 0 : 18;
-    const total = subtotal + ship;
+    // Keep addon checkbox state in sync
+    const aw = document.getElementById('addon-wrap'); if (aw) aw.checked = !!state.giftWrap;
+    const ac = document.getElementById('addon-card'); if (ac) ac.checked = !!state.handwrittenCard;
+
+    // 3-tier thresholds
+    const T1 = state.freeShippingAt;     // 420 ship
+    const T2 = state.giftAt;              // 640 gift
+    const T3 = state.discountAt;          // 980 10% off
+    const tierFillPct = Math.min(100, (subtotal / T3) * 100);
+    const tierMsg = subtotal >= T3 ? 'Você destravou <strong>10% OFF</strong> + brinde + frete grátis ✦'
+                   : subtotal >= T2 ? `<strong>Brinde liberado</strong> · faltam ${money(T3-subtotal)} para <strong>10% OFF</strong>`
+                   : subtotal >= T1 ? `<strong>Frete grátis conquistado</strong> · faltam ${money(T2-subtotal)} para ganhar um brinde`
+                   : `Faltam <strong>${money(T1-subtotal)}</strong> para frete grátis`;
+    const tierLabel = document.getElementById('drawer-tier-label');
+    if (tierLabel) tierLabel.innerHTML = tierMsg;
+    const tierFill = document.querySelector('#drawer-tiers .tier-fill');
+    if (tierFill) tierFill.style.setProperty('--tw', tierFillPct + '%');
+    document.querySelectorAll('#drawer-tiers .tier-dot').forEach(dot => {
+      const t = dot.dataset.tier;
+      const ok = (t==='ship' && subtotal>=T1) || (t==='gift' && subtotal>=T2) || (t==='off' && subtotal>=T3);
+      dot.classList.toggle('is-on', ok);
+    });
+
+    // Compute discount + ship
+    const discount = subtotal >= T3 ? Math.round(subtotal * 0.10) : 0;
+    const ship = subtotal >= T1 ? 0 : (state.cart.length ? 18 : 0);
+    const total = Math.max(0, subtotal - discount + ship);
+
     document.getElementById('drawer-totals').innerHTML = `
+      ${discount>0 ? `<div class="row" style="color:var(--terracotta);"><span>Desconto combo</span><span>−${money(discount)}</span></div>` : ''}
       <div class="row"><span>Subtotal</span><span>${money(subtotal)}</span></div>
       <div class="row"><span>Frete</span><span>${ship===0?'Grátis':money(ship)}</span></div>
       <div class="row total"><span>Total</span><span>${money(total)}</span></div>`;
 
-    // Progress
-    const needed = Math.max(0, state.freeShippingAt - subtotal);
-    const pct = Math.min(100, (subtotal / state.freeShippingAt) * 100);
-    const txt = needed === 0 ? 'Você ganhou frete grátis ✦' : `Faltam ${money(needed)} para frete grátis`;
-    document.getElementById('drawer-progress-text').textContent = txt;
-    document.querySelector('#drawer-progress .cart-progress__bar').style.setProperty('--p', pct + '%');
+    // Cart page progress (legacy)
     if (document.getElementById('cart-progress-text')){
+      const needed = Math.max(0, T1 - subtotal);
+      const pct = Math.min(100, (subtotal / T1) * 100);
+      const txt = needed === 0 ? 'Você ganhou frete grátis ✦' : `Faltam ${money(needed)} para frete grátis`;
       document.getElementById('cart-progress-text').textContent = txt;
       document.querySelector('#cart-progress .cart-progress__bar').style.setProperty('--p', pct + '%');
     }
@@ -2513,6 +3308,7 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
         }).join('');
       }
       document.getElementById('cart-page-totals').innerHTML = `
+        ${discount>0 ? `<div class="row" style="color:var(--terracotta);"><span>Desconto combo</span><span>−${money(discount)}</span></div>` : ''}
         <div class="row"><span>Subtotal</span><span>${money(subtotal)}</span></div>
         <div class="row"><span>Frete estimado</span><span>${ship===0?'Grátis':money(ship)}</span></div>
         <div class="row total"><span>Total</span><span>${money(total)}</span></div>`;
@@ -2529,6 +3325,7 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
         return `<div class="order-line"><img src="${p.img}" alt=""/><div><strong>${p.title}</strong><span>${p.catLabel} · ${it.qty}x</span></div><em>${money(p.price*it.qty)}</em></div>`;
       }).join('') : '<p style="color:var(--taupe);">Seu carrinho está vazio — <a href="#/shop" style="text-decoration:underline;">escolha algo</a>.</p>';
       document.getElementById('checkout-totals').innerHTML = `
+        ${discount>0 ? `<div class="row" style="color:var(--terracotta);"><span>Desconto combo</span><span>−${money(discount)}</span></div>` : ''}
         <div class="row"><span>Subtotal</span><span>${money(subtotal)}</span></div>
         <div class="row"><span>Frete</span><span>${ship===0?'Grátis':money(ship)}</span></div>
         <div class="row total" style="font-family:'Fraunces',serif; font-size:var(--t-25); padding-top:12px; border-top:1px solid var(--line); margin-top:8px; display:flex; justify-content:space-between;"><span>Total</span><span>${money(total)}</span></div>`;
@@ -2740,11 +3537,75 @@ hr{ border:0; border-top:1px solid var(--line); margin:0; }
     alert('Demo: pedido enviado com sucesso. No ambiente real, este passo dispara o gateway de pagamento e redireciona para /pedido/confirmado.');
   });
 
+  /* -------------------- LIVE SOCIAL PROOF: popup -------------------- */
+  const LIVE_BUYERS = [
+    { name:'Beatriz', city:'São Paulo' }, { name:'João', city:'Porto' },
+    { name:'Marta', city:'Lisboa' },     { name:'Helena', city:'Rio de Janeiro' },
+    { name:'Camila', city:'Curitiba' },  { name:'Pedro', city:'Belo Horizonte' },
+    { name:'Luísa', city:'Brasília' },   { name:'Rafael', city:'Porto Alegre' },
+    { name:'Ana', city:'Florianópolis' },{ name:'Tiago', city:'Salvador' },
+    { name:'Sofia', city:'Madrid' },     { name:'Miguel', city:'Barcelona' },
+  ];
+  let livePopIdx = 0;
+  function showLivePop(){
+    const el = document.getElementById('live-pop');
+    if (!el) return;
+    const buyer = LIVE_BUYERS[livePopIdx % LIVE_BUYERS.length];
+    const product = PRODUCTS[Math.floor(Math.random() * PRODUCTS.length)];
+    const mins = 2 + Math.floor(Math.random() * 18);
+    document.getElementById('lp-img').src = product.img;
+    document.getElementById('lp-name').textContent = `${buyer.name}, ${buyer.city}`;
+    document.getElementById('lp-sub').textContent = `comprou ${product.title} · há ${mins} min`;
+    el.classList.add('is-on');
+    livePopIdx++;
+    clearTimeout(window.__mvLpHide);
+    window.__mvLpHide = setTimeout(() => el.classList.remove('is-on'), 5500);
+  }
+  setTimeout(showLivePop, 3500);
+  setInterval(showLivePop, 14000);
+
+  /* -------------------- LIVE: people online oscillation -------------------- */
+  function oscillatePeople(){
+    const el = document.getElementById('people-online-n');
+    if (!el) return;
+    const cur = parseInt(el.textContent, 10) || 142;
+    const delta = Math.floor(Math.random() * 7) - 3;
+    const next = Math.max(84, Math.min(248, cur + delta));
+    el.textContent = next;
+  }
+  setInterval(oscillatePeople, 4500);
+
+  /* -------------------- GIFT ADDONS -------------------- */
+  document.addEventListener('change', (e) => {
+    if (e.target.id === 'addon-wrap'){ state.giftWrap = e.target.checked; persist(); toastMini('✦ Embrulho adicionado'); }
+    if (e.target.id === 'addon-card'){ state.handwrittenCard = e.target.checked; persist(); toastMini('✦ Cartão escrito à mão adicionado'); }
+  });
+  function toastMini(msg){
+    const t = document.getElementById('toast');
+    document.getElementById('toast-img').src = 'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=200&q=70';
+    document.getElementById('toast-title').textContent = msg;
+    document.getElementById('toast-sub').textContent = 'Incluído sem custo';
+    t.classList.add('is-on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('is-on'), 2400);
+  }
+
+  /* -------------------- EXPRESS PAY -------------------- */
+  document.addEventListener('click', (e) => {
+    const ep = e.target.closest('[data-express]');
+    if (!ep) return;
+    e.preventDefault();
+    const kind = ep.dataset.express;
+    const labels = { apple:'Apple Pay', google:'Google Pay', pix:'Pix' };
+    alert(`Demo: disparando fluxo ${labels[kind] || kind}. No ambiente real, este botão aciona o SDK de pagamento e redireciona para confirmação.`);
+  });
+
   // Init
   renderHome();
   navigate(location.hash || '#/');
   runSearch('');
   observeReveals();
+  updateCartUI();
 })();
 </script>
 </body>
