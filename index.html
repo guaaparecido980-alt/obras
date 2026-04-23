@@ -339,15 +339,36 @@ p { color: var(--text-muted); max-width: 62ch; }
   .nav-links.mobile-open {
     display: flex; position: fixed;
     top: 65px; left: 0; right: 0;
+    bottom: 0;
     flex-direction: column;
     background: var(--bg);
-    padding: var(--s-4);
-    gap: var(--s-3);
-    border-bottom: 1px solid var(--line);
-    align-items: flex-start;
+    padding: var(--s-4) var(--s-3);
+    gap: var(--s-2);
+    border-top: 1px solid var(--line);
+    align-items: stretch;
+    justify-content: flex-start;
+    overflow-y: auto;
   }
-  .nav-links.mobile-open a { font-size: 1.2rem; font-family: var(--f-display); }
-  .nav-links.mobile-open .mobile-cta { display: inline-flex; }
+  .nav-links.mobile-open li { width: 100%; }
+  .nav-links.mobile-open a {
+    font-size: 1.6rem;
+    font-family: var(--f-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    padding: var(--s-2) 0;
+    border-bottom: 1px solid var(--line);
+    display: block;
+    width: 100%;
+  }
+  .nav-links.mobile-open a:last-child { border-bottom: none; }
+  .nav-links.mobile-open .mobile-cta {
+    display: inline-flex;
+    font-family: var(--f-body);
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: none;
+    margin-top: var(--s-3);
+  }
   .nav-links.mobile-open .mobile-cta {
     margin-top: var(--s-2);
     padding: 0.9rem 1.3rem;
@@ -372,12 +393,15 @@ p { color: var(--text-muted); max-width: 62ch; }
 ============================================================= */
 .hero {
   position: relative;
-  min-height: 100vh;
-  padding: 140px 0 var(--s-6);
+  min-height: min(100vh, 820px);
+  padding: 140px 0 var(--s-5);
   display: flex;
   align-items: center;
   overflow: hidden;
   background: var(--bg-deep);
+}
+@media (max-width: 768px) {
+  .hero { min-height: 100vh; padding-top: 120px; }
 }
 
 .hero-bg { position: absolute; inset: 0; z-index: 0; }
@@ -423,6 +447,11 @@ p { color: var(--text-muted); max-width: 62ch; }
 }
 
 .hero-content { position: relative; z-index: 4; max-width: 960px; }
+@media (min-width: 1281px) {
+  /* Em desktop grande, reserva espaço à direita pra ficha técnica */
+  .hero h1 { max-width: 800px; }
+  .hero-sub { max-width: 560px; }
+}
 
 .hero-meta {
   display: flex; gap: var(--s-3);
@@ -545,17 +574,17 @@ p { color: var(--text-muted); max-width: 62ch; }
 /* NOVO: Ficha técnica no canto — substitui "nota do fundador" */
 .hero-spec {
   position: absolute;
-  right: var(--s-4);
+  right: max(var(--s-5), calc((100vw - var(--container)) / 2 + var(--s-4)));
   bottom: var(--s-5);
   z-index: 4;
-  width: 280px;
+  width: 260px;
   padding: var(--s-3);
   border: 1px solid var(--line-strong);
-  background: rgba(8, 8, 10, 0.6);
+  background: rgba(8, 8, 10, 0.72);
   backdrop-filter: blur(12px);
   font-family: var(--f-mono);
-  font-size: 0.74rem;
-  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
 }
 .hero-spec-label {
@@ -575,37 +604,16 @@ p { color: var(--text-muted); max-width: 62ch; }
 .hero-spec-row span:first-child { color: var(--text-dim); }
 .hero-spec-row span:last-child { color: var(--text); }
 
-@media (max-width: 1100px) {
+@media (max-width: 1280px) {
   .hero-spec { display: none; }
 }
 
-.scroll-indicator {
-  position: absolute;
-  bottom: var(--s-4);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 4;
-  font-family: var(--f-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  display: flex; flex-direction: column;
-  align-items: center; gap: 0.5rem;
-  opacity: 0.6;
-}
-.scroll-indicator::after {
-  content: ""; width: 1px; height: 40px;
-  background: var(--text-muted);
-  animation: scrollHint 2s infinite var(--ease);
-  transform-origin: top;
-}
+.scroll-indicator { display: none; }
 @keyframes scrollHint {
   0% { transform: scaleY(0); }
   50% { transform: scaleY(1); }
   100% { transform: scaleY(0); transform-origin: bottom; }
 }
-@media (max-width: 768px) { .scroll-indicator { display: none; } }
 
 /* ============================================================
    5. STATS — mantido
@@ -653,14 +661,14 @@ p { color: var(--text-muted); max-width: 62ch; }
 /* ============================================================
    6. SECTION HEADER (shared)
 ============================================================= */
-section { padding: var(--s-8) 0; position: relative; }
-@media (max-width: 768px) { section { padding: var(--s-6) 0; } }
+section { padding: var(--s-6) 0; position: relative; }
+@media (max-width: 768px) { section { padding: var(--s-5) 0; } }
 
 .section-header {
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   gap: var(--s-5);
-  margin-bottom: var(--s-6);
+  margin-bottom: var(--s-5);
   align-items: end;
 }
 .section-header .meta {
@@ -888,9 +896,9 @@ section { padding: var(--s-8) 0; position: relative; }
 .process { background: var(--bg); position: relative; overflow: hidden; }
 .process-bg-word {
   position: absolute;
-  top: var(--s-5); right: -4%;
+  top: var(--s-5); right: 0;
   font-family: var(--f-display);
-  font-size: clamp(8rem, 20vw, 22rem);
+  font-size: clamp(6rem, 16vw, 18rem);
   font-style: italic;
   font-weight: 300;
   color: var(--bg-raised);
@@ -898,6 +906,8 @@ section { padding: var(--s-8) 0; position: relative; }
   pointer-events: none;
   user-select: none;
   letter-spacing: -0.05em;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .process-content { position: relative; z-index: 1; }
@@ -993,7 +1003,8 @@ section { padding: var(--s-8) 0; position: relative; }
   background-size: 40px 40px;
   opacity: 0.5;
 }
-.project-fallback svg { width: 60%; height: auto; opacity: 0.6; }
+.project-fallback svg { width: 68%; height: auto; opacity: 0.7; transition: opacity 0.6s var(--ease); }
+.project:hover .project-fallback svg { opacity: 0.85; }
 .project:hover .project-fallback { background: linear-gradient(135deg, #16161A 0%, #22221E 100%); }
 
 .project-overlay {
@@ -1423,7 +1434,7 @@ section { padding: var(--s-8) 0; position: relative; }
 ============================================================= */
 .cta-final {
   background: var(--bg);
-  padding: var(--s-9) 0;
+  padding: var(--s-6) 0;
   position: relative;
   overflow: hidden;
   border-top: 1px solid var(--line);
@@ -1622,7 +1633,7 @@ footer { background: var(--bg); padding: var(--s-6) 0 var(--s-3); border-top: 1p
       2. Fallback SVG premium se imagem não carregar
       Basta remover a <img> quando não tiver foto e deixar só o fallback.
     -->
-    <img class="hero-img" src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=2000" alt="Residência de alto padrão construída pela LHM Engenharia em Curitiba" loading="eager" fetchpriority="high" onerror="this.style.display='none'; document.querySelector('.hero-fallback').style.display='flex';"/>
+    <img class="hero-img" src="https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=2000" alt="Residência de alto padrão construída pela LHM Engenharia em Curitiba" loading="eager" fetchpriority="high" onerror="this.style.display='none'; document.querySelector('.hero-fallback').style.display='flex';"/>
     
     <!-- Fallback premium: planta técnica arquitetônica em SVG -->
     <div class="hero-fallback" style="display:none;">
@@ -2001,7 +2012,18 @@ footer { background: var(--bg); padding: var(--s-6) 0 var(--s-3); border-top: 1p
 
     <div class="portfolio-grid">
       <article class="project large fade-up">
-        <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Residência de alto padrão em steel frame construída pela LHM" loading="eager"/>
+        <div class="project-fallback" role="img" aria-label="Residência em steel frame - Alphaville">
+          <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C8A968" stroke-width="1">
+            <rect x="50" y="50" width="300" height="400" opacity="0.7"/>
+            <rect x="70" y="70" width="120" height="160" opacity="0.5"/>
+            <rect x="210" y="70" width="120" height="160" opacity="0.5"/>
+            <rect x="70" y="250" width="260" height="90" opacity="0.5"/>
+            <rect x="70" y="360" width="120" height="80" opacity="0.5"/>
+            <rect x="210" y="360" width="120" height="80" opacity="0.5"/>
+            <line x1="50" y1="470" x2="350" y2="470" stroke-dasharray="2,4" opacity="0.4"/>
+            <text x="200" y="490" text-anchor="middle" fill="#C8A968" font-family="monospace" font-size="10" opacity="0.7">LHM · PROJ-2026-01 · 380m²</text>
+          </svg>
+        </div>
         <div class="project-overlay">
           <div class="project-tag">Steel Frame · Residencial</div>
           <h3 class="project-title">Residência Condomínio Alphaville</h3>
@@ -2014,7 +2036,16 @@ footer { background: var(--bg); padding: var(--s-6) 0 var(--s-3); border-top: 1p
       </article>
 
       <article class="project fade-up">
-        <img src="https://images.pexels.com/photos/1396132/pexels-photo-1396132.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Casa contemporânea em alvenaria no litoral do Paraná"/>
+        <div class="project-fallback" role="img" aria-label="Casa Mar no litoral do Paraná">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C8A968" stroke-width="1">
+            <rect x="50" y="50" width="300" height="200" opacity="0.7"/>
+            <rect x="70" y="70" width="140" height="90" opacity="0.5"/>
+            <rect x="230" y="70" width="100" height="90" opacity="0.5"/>
+            <rect x="70" y="180" width="260" height="60" opacity="0.5"/>
+            <line x1="50" y1="270" x2="350" y2="270" stroke-dasharray="2,4" opacity="0.4"/>
+            <text x="200" y="290" text-anchor="middle" fill="#C8A968" font-family="monospace" font-size="10" opacity="0.7">LHM · PROJ-2025-17 · 240m²</text>
+          </svg>
+        </div>
         <div class="project-overlay">
           <div class="project-tag">Alvenaria · Residencial</div>
           <h3 class="project-title">Casa Mar — Litoral PR</h3>
@@ -2026,7 +2057,18 @@ footer { background: var(--bg); padding: var(--s-6) 0 var(--s-3); border-top: 1p
       </article>
 
       <article class="project fade-up">
-        <img src="https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Clínica de alto padrão no Batel em Curitiba"/>
+        <div class="project-fallback" role="img" aria-label="Clínica Integrada no Batel">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C8A968" stroke-width="1">
+            <rect x="50" y="50" width="300" height="200" opacity="0.7"/>
+            <rect x="70" y="70" width="90" height="70" opacity="0.5"/>
+            <rect x="170" y="70" width="90" height="70" opacity="0.5"/>
+            <rect x="270" y="70" width="60" height="70" opacity="0.5"/>
+            <rect x="70" y="160" width="200" height="80" opacity="0.5"/>
+            <rect x="280" y="160" width="50" height="80" opacity="0.5"/>
+            <line x1="50" y1="270" x2="350" y2="270" stroke-dasharray="2,4" opacity="0.4"/>
+            <text x="200" y="290" text-anchor="middle" fill="#C8A968" font-family="monospace" font-size="10" opacity="0.7">LHM · PROJ-2024-22 · 180m²</text>
+          </svg>
+        </div>
         <div class="project-overlay">
           <div class="project-tag">Comercial · Saúde</div>
           <h3 class="project-title">Clínica Integrada Batel</h3>
@@ -2060,7 +2102,17 @@ footer { background: var(--bg); padding: var(--s-6) 0 var(--s-3); border-top: 1p
       </article>
 
       <article class="project fade-up">
-        <img src="https://images.pexels.com/photos/2119713/pexels-photo-2119713.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Residência com piscina em Curitiba"/>
+        <div class="project-fallback" role="img" aria-label="Casa com Vista - Graciosa">
+          <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C8A968" stroke-width="1">
+            <rect x="50" y="50" width="300" height="200" opacity="0.7"/>
+            <rect x="70" y="70" width="110" height="100" opacity="0.5"/>
+            <rect x="200" y="70" width="130" height="100" opacity="0.5"/>
+            <rect x="70" y="190" width="100" height="50" opacity="0.5"/>
+            <rect x="190" y="190" width="140" height="50" opacity="0.5"/>
+            <line x1="50" y1="270" x2="350" y2="270" stroke-dasharray="2,4" opacity="0.4"/>
+            <text x="200" y="290" text-anchor="middle" fill="#C8A968" font-family="monospace" font-size="10" opacity="0.7">LHM · PROJ-2024-09 · 420m²</text>
+          </svg>
+        </div>
         <div class="project-overlay">
           <div class="project-tag">Residencial</div>
           <h3 class="project-title">Casa com Vista — Graciosa</h3>
@@ -2178,7 +2230,16 @@ footer { background: var(--bg); padding: var(--s-6) 0 var(--s-3); border-top: 1p
       <!-- CASE 1 -->
       <article class="case-card fade-up">
         <div class="case-media">
-          <img src="https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Residência em steel frame no Ecoville"/>
+          <div class="project-fallback" role="img" aria-label="Residência Ecoville em steel frame">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C8A968" stroke-width="1">
+              <rect x="60" y="60" width="280" height="180" opacity="0.65"/>
+              <rect x="80" y="80" width="130" height="90" opacity="0.45"/>
+              <rect x="230" y="80" width="110" height="90" opacity="0.45"/>
+              <rect x="80" y="190" width="260" height="55" opacity="0.45"/>
+              <line x1="60" y1="265" x2="340" y2="265" stroke-dasharray="2,4" opacity="0.4"/>
+              <text x="200" y="285" text-anchor="middle" fill="#C8A968" font-family="monospace" font-size="9" opacity="0.6">LHM · CASE-ECV-340</text>
+            </svg>
+          </div>
           <span class="case-media-tag">Steel Frame · 340m²</span>
         </div>
         <div class="case-body">
@@ -2229,7 +2290,18 @@ footer { background: var(--bg); padding: var(--s-6) 0 var(--s-3); border-top: 1p
       <!-- CASE 3 -->
       <article class="case-card fade-up">
         <div class="case-media">
-          <img src="https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Clínica de alto padrão no Batel"/>
+          <div class="project-fallback" role="img" aria-label="Clínica no Batel em Curitiba">
+            <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C8A968" stroke-width="1">
+              <rect x="60" y="60" width="280" height="180" opacity="0.65"/>
+              <rect x="80" y="80" width="80" height="65" opacity="0.45"/>
+              <rect x="170" y="80" width="80" height="65" opacity="0.45"/>
+              <rect x="260" y="80" width="80" height="65" opacity="0.45"/>
+              <rect x="80" y="160" width="180" height="80" opacity="0.45"/>
+              <rect x="270" y="160" width="70" height="80" opacity="0.45"/>
+              <line x1="60" y1="265" x2="340" y2="265" stroke-dasharray="2,4" opacity="0.4"/>
+              <text x="200" y="285" text-anchor="middle" fill="#C8A968" font-family="monospace" font-size="9" opacity="0.6">LHM · CASE-BTL-180</text>
+            </svg>
+          </div>
           <span class="case-media-tag">Comercial · 180m²</span>
         </div>
         <div class="case-body">
