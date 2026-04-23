@@ -1,0 +1,20 @@
+# robots.txt — LHM Engenharia
+# https://lhmengenharia.com.br/
+
+User-agent: *
+Allow: /
+Disallow: /privado/
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://lhmengenharia.com.br/sitemap.xml
+
+# Bloquear bots agressivos (opcional — melhora performance e privacidade)
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
