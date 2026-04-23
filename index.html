@@ -380,24 +380,48 @@ p { color: var(--text-muted); max-width: 62ch; }
 .nav-cta:hover::before { transform: translateX(0); }
 .nav-cta > * { position: relative; z-index: 1; }
 
-.nav-toggle { display: none; width: 28px; height: 28px; position: relative; }
+/* Área de toque de 44x44px (Apple HIG mínimo recomendado). As barras continuam visualmente 28px, mas a área clicável é maior. */
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin: -8px;
+  padding: 8px;
+}
 .nav-toggle span {
-  position: absolute; left: 0; right: 0;
-  height: 1.5px; background: var(--text);
+  position: absolute;
+  left: 50%;
+  width: 28px;
+  transform: translateX(-50%);
+  height: 1.5px;
+  background: var(--text);
   transition: all 0.3s;
 }
-.nav-toggle span:nth-child(1) { top: 8px; }
-.nav-toggle span:nth-child(2) { top: 18px; }
-.nav-toggle.open span:nth-child(1) { top: 13px; transform: rotate(45deg); }
-.nav-toggle.open span:nth-child(2) { top: 13px; transform: rotate(-45deg); }
+.nav-toggle span:nth-child(1) { top: 16px; }
+.nav-toggle span:nth-child(2) { top: 26px; }
+.nav-toggle.open span:nth-child(1) { top: 21px; transform: translateX(-50%) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { top: 21px; transform: translateX(-50%) rotate(-45deg); }
+.nav-toggle:active {
+  background: rgba(200, 169, 104, 0.1);
+  border-radius: 4px;
+}
+.nav-toggle { -webkit-tap-highlight-color: transparent; }
 
 @media (max-width: 900px) {
   .nav-links, .nav-cta { display: none; }
-  .nav-toggle { display: block; }
+  .nav-toggle { display: flex; }
+  
   .nav-links.mobile-open {
-    display: flex; position: fixed;
-    top: 65px; left: 0; right: 0;
-    bottom: 0;
+    display: flex;
+    position: fixed;
+    top: 65px;
+    left: 0;
+    right: 0;
+    height: calc(100vh - 65px);
+    height: calc(100dvh - 65px); /* dvh = dynamic viewport, corrige iOS Safari com toolbar */
     flex-direction: column;
     background: var(--bg);
     padding: var(--s-4) var(--s-3);
@@ -406,8 +430,9 @@ p { color: var(--text-muted); max-width: 62ch; }
     align-items: stretch;
     justify-content: flex-start;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
   }
-  .nav-links.mobile-open li { width: 100%; }
+  .nav-links.mobile-open li { width: 100%; list-style: none; }
   .nav-links.mobile-open a {
     font-size: 1.6rem;
     font-family: var(--f-display);
@@ -417,29 +442,26 @@ p { color: var(--text-muted); max-width: 62ch; }
     border-bottom: 1px solid var(--line);
     display: block;
     width: 100%;
+    color: var(--text);
   }
-  .nav-links.mobile-open a:last-child { border-bottom: none; }
+  .nav-links.mobile-open li:last-child a { border-bottom: none; }
+  
+  /* CTA dourado único - consolidado sem duplicatas */
   .nav-links.mobile-open .mobile-cta {
-    display: inline-flex;
-    font-family: var(--f-body);
-    font-size: 1rem;
-    font-weight: 500;
-    border-bottom: none;
     margin-top: var(--s-3);
-  }
-  .nav-links.mobile-open .mobile-cta {
-    margin-top: var(--s-2);
-    padding: 0.9rem 1.3rem;
+    padding: 1rem 1.3rem;
     background: var(--gold);
     color: var(--bg);
     font-family: var(--f-body);
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     font-weight: 500;
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     width: 100%;
-    justify-content: center;
+    border-bottom: none;
+    letter-spacing: 0.01em;
   }
 }
 
@@ -2715,12 +2737,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 navToggle?.addEventListener('click', () => {
+  const opening = !navToggle.classList.contains('open');
   navToggle.classList.toggle('open');
   navLinks.classList.toggle('mobile-open');
+  // Bloqueia scroll do body quando menu está aberto (UX padrão mobile)
+  document.body.style.overflow = opening ? 'hidden' : '';
+  navToggle.setAttribute('aria-expanded', String(opening));
+  navToggle.setAttribute('aria-label', opening ? 'Fechar menu' : 'Abrir menu');
 });
 navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   navToggle.classList.remove('open');
   navLinks.classList.remove('mobile-open');
+  document.body.style.overflow = '';
 }));
 
 // ============================================================
