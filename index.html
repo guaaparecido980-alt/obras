@@ -66,7 +66,7 @@
   SEO — Metas expandidas
 ============================================================= -->
 <title>LHM Engenharia — Construção de Alto Padrão em Steel Frame | Curitiba e Litoral</title>
-<meta name="description" content="Construtora de alto padrão em Curitiba. Steel frame, alvenaria, residencial, comercial, tiny house e ampliações. 12 anos entregando no prazo, dentro da norma, com o acabamento que famílias exigentes herdam. Máximo 6 obras por ano." />
+<meta name="description" content="Construtora de alto padrão em Curitiba. Steel frame, alvenaria, residencial, comercial e tiny house com entrega em 15 dias. 12 anos entregando no prazo, dentro da norma, com o acabamento que famílias exigentes herdam." />
 <meta name="keywords" content="construção alto padrão curitiba, steel frame curitiba, construtora curitiba, construção residencial alto padrão, casa steel frame curitiba, tiny house curitiba, tiny house alto padrão, construtora litoral paraná, LHM engenharia, construtora premium curitiba" />
 <meta name="author" content="LHM Engenharia" />
 <meta name="robots" content="index, follow, max-image-preview:large" />
@@ -121,7 +121,7 @@
   "image": "https://lhmsteelframe.com.br/og-image.jpg",
   "logo": "https://lhmsteelframe.com.br/logo.png",
   "url": "https://lhmsteelframe.com.br/",
-  "telephone": "+55-41-99999-9999",
+  "telephone": "+55-41-99882-2772",
   "priceRange": "$$$$",
   "description": "Construtora de alto padrão em Curitiba, especializada em construção em steel frame, alvenaria convencional, obras residenciais e comerciais de alto padrão. 12 anos de engenharia premium. Atua em Curitiba, região metropolitana e litoral do Paraná.",
   "slogan": "Construímos o que você vai passar para os próximos.",
@@ -206,7 +206,7 @@
       "name": "Quanto custa uma tiny house de alto padrão em Curitiba?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Tiny houses da LHM em steel frame partem de R$ 180 mil (30–40m²) e chegam a R$ 350 mil (acabamento premium, 50–70m²). Prazo de entrega: 60 a 90 dias. Mesmo rigor técnico e acabamento das obras principais."
+        "text": "Tiny houses da LHM em steel frame partem de R$ 180 mil (30–40m²) e chegam a R$ 350 mil (acabamento premium, 50–70m²). Prazo de entrega: 15 dias após assinatura do contrato. Mesmo rigor técnico e acabamento das obras principais."
       }
     }
   ]
@@ -702,6 +702,52 @@ p { color: var(--text-muted); max-width: 62ch; }
   }
 }
 
+/* Hero Tiny House link — destaque sutil */
+.hero-tiny-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: var(--s-3);
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(200, 169, 104, 0.3);
+  background: rgba(200, 169, 104, 0.04);
+  color: var(--text);
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+  align-self: flex-start;
+  width: fit-content;
+}
+.hero-tiny-link:hover {
+  border-color: var(--gold);
+  background: rgba(200, 169, 104, 0.1);
+  transform: translateX(4px);
+}
+.hero-tiny-tag {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  color: var(--bg);
+  background: var(--gold);
+  padding: 0.2rem 0.5rem;
+  text-transform: uppercase;
+}
+.hero-tiny-text {
+  font-family: var(--f-body);
+  font-weight: 400;
+}
+.hero-tiny-arrow {
+  color: var(--gold);
+  font-family: var(--f-mono);
+  transition: transform 0.3s;
+}
+.hero-tiny-link:hover .hero-tiny-arrow { transform: translateX(3px); }
+@media (max-width: 600px) {
+  .hero-tiny-link { font-size: 0.78rem; padding: 0.6rem 0.85rem; gap: 0.5rem; }
+  .hero-tiny-tag { font-size: 0.58rem; }
+}
+
 /* NOVO: Ficha técnica no canto — substitui "nota do fundador" */
 .hero-spec {
   position: absolute;
@@ -1020,6 +1066,224 @@ section { padding: var(--s-6) 0; position: relative; }
 }
 
 @media (max-width: 900px) { .status-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   9.5 TINY HOUSE — SEÇÃO DEDICADA (linha estratégica)
+   Background diferenciado pra destacar como categoria especial.
+============================================================= */
+.tiny {
+  background: linear-gradient(180deg, var(--bg) 0%, #0E0E12 50%, var(--bg) 100%);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.tiny::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(200, 169, 104, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 169, 104, 0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.tiny-content { position: relative; z-index: 1; }
+
+.tiny-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: var(--s-6);
+  align-items: center;
+}
+
+.tiny-text { max-width: 580px; }
+
+.tiny-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(200, 169, 104, 0.25);
+  background: rgba(200, 169, 104, 0.05);
+  margin-bottom: var(--s-3);
+}
+.tiny-pulse {
+  width: 6px; height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(200, 169, 104, 0.6);
+  animation: tinyPulse 2s infinite;
+}
+@keyframes tinyPulse {
+  0% { box-shadow: 0 0 0 0 rgba(200, 169, 104, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(200, 169, 104, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(200, 169, 104, 0); }
+}
+
+.tiny-title {
+  font-family: var(--f-display);
+  font-size: clamp(2rem, 4.2vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: var(--s-3);
+}
+.tiny-title em {
+  font-style: italic;
+  color: var(--gold);
+  font-weight: 400;
+}
+.tiny-highlight {
+  color: var(--gold);
+  font-style: italic;
+  font-weight: 500;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 2px;
+}
+
+.tiny-sub {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: var(--s-4);
+}
+
+.tiny-specs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-2);
+  margin-bottom: var(--s-4);
+  padding: var(--s-3) 0;
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+}
+.tiny-spec-num {
+  font-family: var(--f-display);
+  font-size: 1.85rem;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.tiny-spec-num span {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  color: var(--gold);
+  margin-left: 0.25rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+.tiny-spec-label {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.tiny-features {
+  list-style: none;
+  margin-bottom: var(--s-4);
+  padding: 0;
+}
+.tiny-features li {
+  font-size: 0.95rem;
+  color: var(--text);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  padding-left: 1.5rem;
+}
+.tiny-features li:last-child { border-bottom: none; }
+.tiny-features li::before {
+  content: "↳";
+  color: var(--gold);
+  position: absolute;
+  left: 0;
+  font-family: var(--f-mono);
+}
+
+.tiny-cta-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+.tiny-cta {
+  align-self: flex-start;
+}
+.tiny-cta-support {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  line-height: 1.5;
+}
+.tiny-cta-support .live {
+  width: 6px; height: 6px;
+  background: var(--success);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--success);
+  flex-shrink: 0;
+}
+
+/* Visual à direita */
+.tiny-visual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.tiny-visual-frame {
+  background: linear-gradient(135deg, #0A0A0C 0%, #14141A 100%);
+  border: 1px solid var(--line-strong);
+  padding: var(--s-3);
+  position: relative;
+  overflow: hidden;
+}
+.tiny-visual-frame svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tiny-uses {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+.tiny-use {
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 0.65rem 0.9rem;
+  background: var(--bg-raised);
+  border-left: 2px solid var(--gold);
+  letter-spacing: 0.02em;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .tiny-grid { grid-template-columns: 1fr; gap: var(--s-4); }
+  .tiny-visual { order: -1; }
+  .tiny-specs { grid-template-columns: repeat(2, 1fr); gap: var(--s-3); }
+  .tiny-uses { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .tiny-spec-num { font-size: 1.5rem; }
+  .tiny-cta { width: 100%; justify-content: center; }
+}
 
 /* ============================================================
    10. PROCESSO (mantido)
@@ -1750,12 +2014,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li><a href="#servicos">Escopo</a></li>
         <li><a href="#processo">Método</a></li>
         <li><a href="#obras">Obras</a></li>
+        <li><a href="#tiny">Tiny</a></li>
         <li><a href="#cases">Cases</a></li>
         <li><a href="#faq">FAQ</a></li>
-        <li><a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C+gostaria+de+apresentar+meu+projeto+%C3%A0+LHM" class="mobile-cta" target="_blank" rel="noopener">Apresentar projeto →</a></li>
+        <li><a href="https://wa.me/5541998822772?text=Ol%C3%A1%2C+gostaria+de+apresentar+meu+projeto+%C3%A0+LHM" class="mobile-cta" target="_blank" rel="noopener">Apresentar projeto →</a></li>
       </ul>
     </nav>
-    <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C+gostaria+de+apresentar+meu+projeto+%C3%A0+LHM" class="nav-cta" target="_blank" rel="noopener">
+    <a href="https://wa.me/5541998822772?text=Ol%C3%A1%2C+gostaria+de+apresentar+meu+projeto+%C3%A0+LHM" class="nav-cta" target="_blank" rel="noopener">
       Apresentar projeto
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H9M17 7V15"/></svg>
     </a>
@@ -1839,7 +2104,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </p>
 
     <div class="hero-actions fade-up visible">
-      <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C+gostaria+de+apresentar+meu+projeto+%C3%A0+LHM" class="btn btn-primary" target="_blank" rel="noopener">
+      <a href="https://wa.me/5541998822772?text=Ol%C3%A1%2C+gostaria+de+apresentar+meu+projeto+%C3%A0+LHM" class="btn btn-primary" target="_blank" rel="noopener">
         Apresentar meu projeto
         <span class="arrow">→</span>
       </a>
@@ -1853,6 +2118,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <span class="live"></span>
       Resposta em até 2 horas · direto com o engenheiro responsável
     </div>
+
+    <!-- Linha secundária: destaque sutil pra Tiny House -->
+    <a href="#tiny" class="hero-tiny-link fade-up visible">
+      <span class="hero-tiny-tag">NOVO</span>
+      <span class="hero-tiny-text">Linha Tiny House — entrega em 15 dias</span>
+      <span class="hero-tiny-arrow">→</span>
+    </a>
   </div>
 
   <!-- NOVO: Ficha técnica premium — substitui nota do fundador 
@@ -2043,9 +2315,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </header>
         <div class="service-body">
           <h3>Tiny <em>House</em></h3>
-          <p>Casas compactas de alto padrão para segunda residência, litoral ou locação. Steel frame modular, entrega em 60 a 90 dias, acabamento no mesmo nível de uma obra principal.</p>
+          <p>Casas compactas de alto padrão para segunda residência, litoral ou locação. Steel frame modular, entrega em 15 dias após assinatura do contrato, acabamento no mesmo nível de uma obra principal.</p>
         </div>
-        <div class="service-benefit">↳ Pronta em 60–90 dias</div>
+        <div class="service-benefit">↳ Entrega em 15 dias</div>
       </article>
     </div>
   </div>
@@ -2091,6 +2363,141 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h3>Seleção por compatibilidade</h3>
         <p>De cada três projetos apresentados, aceitamos um. Escopo, prazo e visão técnica precisam estar alinhados antes da assinatura.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+  TINY HOUSE — SEÇÃO DEDICADA
+  Linha estratégica: ticket menor, prazo curto, alto giro.
+  Posicionamento: investimento (não casa barata).
+========================================================= -->
+<section class="tiny" id="tiny">
+  <div class="container tiny-content">
+    <div class="tiny-grid">
+      <!-- COLUNA ESQUERDA: copy estratégica -->
+      <div class="tiny-text">
+        <div class="tiny-eyebrow">
+          <span class="tiny-pulse"></span>
+          LINHA TINY · STEEL FRAME MODULAR
+        </div>
+
+        <h2 class="tiny-title">
+          Tiny <em>house</em> de alto padrão.<br/>
+          <span class="tiny-highlight">15 dias</span> após assinar o contrato.
+        </h2>
+
+        <p class="tiny-sub">
+          Para quem quer uma segunda residência no litoral, casa de campo, escritório no quintal ou unidade para locação por temporada — sem esperar uma obra de 12 meses.
+        </p>
+
+        <!-- Dados técnicos em grid -->
+        <div class="tiny-specs">
+          <div class="tiny-spec">
+            <div class="tiny-spec-num">15<span>dias</span></div>
+            <div class="tiny-spec-label">Entrega após contrato</div>
+          </div>
+          <div class="tiny-spec">
+            <div class="tiny-spec-num">30–70<span>m²</span></div>
+            <div class="tiny-spec-label">Área útil disponível</div>
+          </div>
+          <div class="tiny-spec">
+            <div class="tiny-spec-num">100<span>%</span></div>
+            <div class="tiny-spec-label">Steel frame modular</div>
+          </div>
+          <div class="tiny-spec">
+            <div class="tiny-spec-num">A1<span></span></div>
+            <div class="tiny-spec-label">Mesmo padrão de obra principal</div>
+          </div>
+        </div>
+
+        <!-- Diferenciais (quebra objeção) -->
+        <ul class="tiny-features">
+          <li>Projeto executivo, ART e habite-se inclusos</li>
+          <li>Acabamento idêntico ao de uma residência grande</li>
+          <li>Garantia estrutural de 5 anos</li>
+          <li>Modelos prontos ou projeto sob medida</li>
+        </ul>
+
+        <!-- CTA dedicado -->
+        <div class="tiny-cta-row">
+          <a href="https://wa.me/5541998822772?text=Ol%C3%A1%2C+tenho+interesse+em+uma+tiny+house+da+LHM"
+             class="btn-primary tiny-cta" target="_blank" rel="noopener">
+            Quero uma tiny house
+            <span class="arrow">→</span>
+          </a>
+          <span class="tiny-cta-support">
+            <span class="live"></span>
+            Resposta em até 2 horas · direto com o engenheiro responsável
+          </span>
+        </div>
+      </div>
+
+      <!-- COLUNA DIREITA: ilustração técnica vetorial -->
+      <div class="tiny-visual">
+        <div class="tiny-visual-frame">
+          <!-- SVG isométrico de tiny house -->
+          <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#C8A968" stroke-linecap="square">
+            <!-- Grid técnico de fundo -->
+            <defs>
+              <pattern id="tinygrid" width="25" height="25" patternUnits="userSpaceOnUse">
+                <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#C8A968" stroke-width="0.3" opacity="0.18"/>
+              </pattern>
+            </defs>
+            <rect width="500" height="500" fill="url(#tinygrid)"/>
+
+            <!-- Tiny house em vista isométrica -->
+            <g stroke-width="1.5">
+              <!-- Base/laje -->
+              <path d="M 100 340 L 250 380 L 400 340 L 250 300 Z" opacity="0.7"/>
+              <!-- Parede frontal -->
+              <path d="M 100 340 L 100 220 L 250 260 L 250 380 Z" opacity="0.85"/>
+              <!-- Parede lateral direita -->
+              <path d="M 250 380 L 250 260 L 400 220 L 400 340 Z" opacity="0.6"/>
+              <!-- Telhado -->
+              <path d="M 100 220 L 250 180 L 400 220 L 250 260 Z" stroke-width="2"/>
+              <!-- Cumeeira -->
+              <path d="M 175 200 L 250 180 L 325 200" stroke-width="1" opacity="0.5"/>
+              
+              <!-- Janela frontal grande -->
+              <rect x="135" y="245" width="80" height="60" stroke-width="1.2" opacity="0.7"/>
+              <line x1="175" y1="245" x2="175" y2="305" opacity="0.4"/>
+              
+              <!-- Porta frontal -->
+              <rect x="225" y="265" width="20" height="55" stroke-width="1" opacity="0.6"/>
+              
+              <!-- Janelas laterais -->
+              <rect x="290" y="245" width="40" height="50" stroke-width="1" opacity="0.5"/>
+              <rect x="345" y="245" width="40" height="50" stroke-width="1" opacity="0.5"/>
+              
+              <!-- Detalhes técnicos: linhas de medição -->
+              <line x1="100" y1="395" x2="400" y2="395" stroke-width="0.6" stroke-dasharray="3,3" opacity="0.4"/>
+              <line x1="100" y1="390" x2="100" y2="400" stroke-width="0.6" opacity="0.4"/>
+              <line x1="400" y1="390" x2="400" y2="400" stroke-width="0.6" opacity="0.4"/>
+              
+              <line x1="65" y1="180" x2="65" y2="380" stroke-width="0.6" stroke-dasharray="3,3" opacity="0.4"/>
+              <line x1="60" y1="180" x2="70" y2="180" stroke-width="0.6" opacity="0.4"/>
+              <line x1="60" y1="380" x2="70" y2="380" stroke-width="0.6" opacity="0.4"/>
+            </g>
+
+            <!-- Marcações técnicas (texto) -->
+            <g fill="#C8A968" font-family="JetBrains Mono, monospace" font-size="9" opacity="0.7">
+              <text x="250" y="412" text-anchor="middle">7,50 m</text>
+              <text x="40" y="285" transform="rotate(-90 40 285)" text-anchor="middle">5,40 m</text>
+              <text x="250" y="445" text-anchor="middle" font-size="10" letter-spacing="2">TINY · STEEL FRAME · 42m²</text>
+              <text x="250" y="465" text-anchor="middle" font-size="8" opacity="0.6" letter-spacing="1.5">LHM · TINY-MOD-A1</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Aplicações em texto (refina o posicionamento) -->
+        <div class="tiny-uses">
+          <div class="tiny-use">→ Casa de praia · litoral PR</div>
+          <div class="tiny-use">→ Escritório · home office</div>
+          <div class="tiny-use">→ Locação · temporada · Airbnb</div>
+          <div class="tiny-use">→ Hospedagem · pousada</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2291,7 +2698,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="portfolio-cta fade-up">
       <p>Cada obra é documentada. Podemos agendar uma visita guiada a uma entrega recente — com o proprietário presente.</p>
-      <a href="https://wa.me/5541999999999?text=Gostaria+de+visitar+uma+obra+entregue" class="btn btn-ghost" target="_blank" rel="noopener">
+      <a href="https://wa.me/5541998822772?text=Gostaria+de+visitar+uma+obra+entregue" class="btn btn-ghost" target="_blank" rel="noopener">
         Agendar visita técnica <span class="arrow">→</span>
       </a>
     </div>
@@ -2576,7 +2983,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div class="decision-cta-wrap fade-up">
       <p>Se você está na coluna da direita, <br/>é aqui que a conversa começa.</p>
-      <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C+me+identifiquei+com+o+perfil+da+LHM+e+quero+apresentar+meu+projeto" class="btn btn-primary" target="_blank" rel="noopener">
+      <a href="https://wa.me/5541998822772?text=Ol%C3%A1%2C+me+identifiquei+com+o+perfil+da+LHM+e+quero+apresentar+meu+projeto" class="btn btn-primary" target="_blank" rel="noopener">
         Apresentar meu projeto
         <span class="arrow">→</span>
       </a>
@@ -2670,7 +3077,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="faq-answer">
             <div class="faq-answer-inner">
               <p>Nossas tiny houses em steel frame partem de R$ 180 mil (entrega básica, 30–40m²) e chegam a R$ 350 mil (acabamento premium, 50–70m²). Ideal para segunda residência, litoral, casa de campo ou locação por temporada.</p>
-              <p>Prazo de entrega: 60 a 90 dias do projeto aprovado à chave. Mesmo rigor técnico e acabamento das obras principais — só que menor e mais rápido.</p>
+              <p>Prazo de entrega: 15 dias após assinatura do contrato. Mesmo rigor técnico e acabamento das obras principais — só que menor e mais rápido.</p>
             </div>
           </div>
         </article>
@@ -2713,7 +3120,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="eyebrow" style="justify-content: center; margin-bottom: var(--s-3);">Próxima etapa</div>
     <h2>Sua obra merece a <em class="italic serif">engenharia certa</em> — <br/>não a construtora mais barata.</h2>
     <p class="lead">Envie seu projeto ou conte sua ideia no WhatsApp. Quem responde é o engenheiro responsável — não um atendente com script.</p>
-    <a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C+quero+apresentar+meu+projeto+%C3%A0+LHM" class="cta-whatsapp" target="_blank" rel="noopener">
+    <a href="https://wa.me/5541998822772?text=Ol%C3%A1%2C+quero+apresentar+meu+projeto+%C3%A0+LHM" class="cta-whatsapp" target="_blank" rel="noopener">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
       Iniciar conversa técnica
     </a>
@@ -2743,6 +3150,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li><a href="#servicos">Escopo</a></li>
           <li><a href="#processo">Método</a></li>
           <li><a href="#obras">Obras</a></li>
+          <li><a href="#tiny">Tiny House</a></li>
           <li><a href="#cases">Cases</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
@@ -2761,7 +3169,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="footer-col">
         <h4>Contato</h4>
         <ul>
-          <li><a href="https://wa.me/5541999999999" target="_blank" rel="noopener">WhatsApp (41) 99999-9999</a></li>
+          <li><a href="https://wa.me/5541998822772" target="_blank" rel="noopener">WhatsApp (41) 99882-2772</a></li>
           <li><a href="mailto:contato@lhmsteelframe.com.br">contato@lhmsteelframe.com.br</a></li>
           <li><a href="https://instagram.com/lhmengenharia" target="_blank" rel="noopener">Instagram</a></li>
           <li>Curitiba, PR · Litoral</li>
@@ -2782,7 +3190,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
-<a href="https://wa.me/5541999999999?text=Ol%C3%A1%2C+gostaria+de+apresentar+meu+projeto" class="whatsapp-fixed" aria-label="Falar no WhatsApp" target="_blank" rel="noopener">
+<a href="https://wa.me/5541998822772?text=Ol%C3%A1%2C+gostaria+de+apresentar+meu+projeto" class="whatsapp-fixed" aria-label="Falar no WhatsApp" target="_blank" rel="noopener">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
 </a>
 
