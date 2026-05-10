@@ -1871,27 +1871,168 @@ section { padding: var(--s-6) 0; position: relative; }
   margin-right: 0.6rem;
 }
 
+/* === Toggle "Ver todas as normas" (mobile only) === */
+.tech-norms-toggle {
+  display: none;
+}
+.tech-norms-toggle-btn {
+  display: none;
+  margin-top: var(--s-3);
+  padding: 0.85rem var(--s-3);
+  width: 100%;
+  background: var(--bg-raised);
+  border: 1px solid var(--line-strong);
+  color: var(--text);
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  text-align: center;
+}
+.tech-norms-toggle-btn:hover,
+.tech-norms-toggle-btn:active {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.tech-norms-toggle-btn .arrow {
+  display: inline-block;
+  margin-left: 0.5rem;
+  transition: transform 0.3s var(--ease);
+}
+.tech-norms-toggle:checked ~ .tech-norms-toggle-btn .arrow {
+  transform: rotate(180deg);
+}
+
+/* Alternar texto "Ver mais" / "Mostrar menos" */
+.tech-norms-toggle-btn .toggle-hide { display: none; }
+.tech-norms-toggle:checked ~ .tech-norms-toggle-btn .toggle-show { display: none; }
+.tech-norms-toggle:checked ~ .tech-norms-toggle-btn .toggle-hide { display: inline; }
+
 @media (max-width: 768px) {
-  .tech-compare-head,
+  /* === Comparativo mobile: redesenhado === */
+  /* Header esconde, vira contexto inline em cada card */
+  .tech-compare-head { display: none; }
+
+  .tech-compare {
+    background: transparent;
+    border: none;
+  }
   .tech-compare-row {
-    grid-template-columns: 1fr;
+    display: block;
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    margin-bottom: var(--s-2);
   }
-  .tech-compare-head > div + div,
-  .tech-compare-row > div + div {
-    border-left: none;
-    border-top: 1px solid var(--line);
-    text-align: left;
-  }
-  .tech-compare-head > div {
-    padding: 0.85rem var(--s-3);
-  }
+  .tech-compare-row:hover { background: var(--bg-raised); }
+
+  /* Item title (componente) - destacado no topo do card */
   .tech-compare-row .tech-compare-item {
     background: var(--bg-deep);
-    font-size: 1rem;
-    padding: 0.85rem var(--s-3);
+    padding: 0.7rem 1rem;
+    font-size: 0.78rem;
+    font-family: var(--f-mono);
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--gold);
+    border-bottom: 1px solid var(--line);
   }
+
+  /* Mercado vs LHM lado a lado em 2 colunas dentro do card */
+  .tech-compare-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "title"
+      "compare";
+  }
+  .tech-compare-row .tech-compare-item { grid-area: title; }
+
+  /* Wrapper interno pros 2 valores lado a lado */
+  .tech-compare-row .tech-compare-market,
+  .tech-compare-row .tech-compare-lhm {
+    padding: 0.85rem 0.9rem;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .tech-compare-row .tech-compare-market {
+    grid-column: 1;
+    border-left: none;
+    border-top: none;
+    border-right: 1px solid var(--line);
+    background: rgba(212, 97, 74, 0.04);
+  }
+  .tech-compare-row .tech-compare-lhm {
+    grid-column: 2;
+    border-left: none;
+    border-top: none;
+    background: rgba(200, 169, 104, 0.04);
+  }
+  .tech-compare-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "title title"
+      "market lhm";
+  }
+  .tech-compare-row .tech-compare-market { grid-area: market; }
+  .tech-compare-row .tech-compare-lhm { grid-area: lhm; }
+
+  .tech-compare-row .x-mark,
+  .tech-compare-row .check-mark {
+    font-size: 0.7rem;
+    margin-right: 0;
+    margin-bottom: 0.2rem;
+    display: inline-block;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .tech-compare-row .x-mark::after { content: " mercado"; color: var(--text-dim); margin-left: 0.3rem; }
+  .tech-compare-row .check-mark::after { content: " LHM"; color: var(--text-dim); margin-left: 0.3rem; }
+
+  .tech-compare-note {
+    font-size: 0.7rem;
+    margin-top: 0.2rem;
+    line-height: 1.3;
+  }
+
+  /* === Normas mobile: 2 colunas + toggle === */
   .tech-norms-head { grid-template-columns: 1fr; gap: var(--s-3); }
-  .tech-norms-grid { grid-template-columns: 1fr; }
+  .tech-norms-head h3 { font-size: 1.4rem; }
+  .tech-norms-head p { font-size: 0.9rem; }
+
+  .tech-norms-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+  }
+  .tech-norm {
+    padding: 0.85rem 0.7rem;
+    gap: 0.25rem;
+  }
+  .tech-norm-code { font-size: 0.7rem; }
+  .tech-norm-desc { font-size: 0.78rem; line-height: 1.35; }
+
+  /* Esconder normas além das 6 primeiras por padrão */
+  .tech-norm:nth-child(n+7) { display: none; }
+  .tech-norms-toggle:checked ~ .tech-norms-grid .tech-norm:nth-child(n+7) { display: flex; }
+
+  /* Mostrar botão toggle só no mobile */
+  .tech-norms-toggle-btn { display: block; }
+
+  /* Footer note menor */
+  .tech-footer-note { font-size: 0.95rem; padding-top: var(--s-2); margin-top: var(--s-3); }
+  .tech-footer-note span { font-size: 0.62rem; display: block; margin-bottom: 0.4rem; }
+
+  /* Padding da seção mais compacto */
+  .tech-intro { margin-bottom: var(--s-4); }
+  .tech-intro p { font-size: 0.95rem; }
+  .tech-norms { padding-top: var(--s-3); }
 }
 
 /* ============================================================
@@ -2957,6 +3098,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
 
+      <!-- Checkbox invisível pra controlar a expansão das normas no mobile (CSS-only, sem JS) -->
+      <input type="checkbox" id="tech-norms-toggle" class="tech-norms-toggle" aria-hidden="true">
+
       <div class="tech-norms-grid">
         <div class="tech-norm">
           <span class="tech-norm-code">ABNT NBR 15253</span>
@@ -3015,6 +3159,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="tech-norm-desc">Ensaio de névoa salina para fixadores e componentes metálicos</span>
         </div>
       </div>
+
+      <!-- Botão pra expandir/recolher (visível só no mobile via CSS) -->
+      <label for="tech-norms-toggle" class="tech-norms-toggle-btn" role="button" aria-controls="tech-norms-grid">
+        <span class="toggle-show">Ver todas as 14 normas técnicas</span>
+        <span class="toggle-hide">Mostrar menos</span>
+        <span class="arrow">↓</span>
+      </label>
 
       <p class="tech-footer-note"><span>↳ Memorial técnico</span>Cada projeto recebe o memorial descritivo completo na assinatura do contrato, com a especificação detalhada de todos os componentes e referências às normas correspondentes.</p>
     </div>
