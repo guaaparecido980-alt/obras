@@ -1665,6 +1665,236 @@ section { padding: var(--s-6) 0; position: relative; }
 @media (max-width: 900px) { .cases-grid { grid-template-columns: 1fr; } }
 
 /* ============================================================
+   13.5 PADRÃO TÉCNICO — nova seção
+   Estrutura: intro + comparativo "mercado vs LHM" + lista de normas
+   Posicionada entre Process e Cases. Audiência: cliente steel
+   frame que pesquisa antes de contratar e checa especificação.
+============================================================= */
+.tech {
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.tech::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 100px 100px;
+  mask-image: radial-gradient(ellipse at top right, black 10%, transparent 70%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.tech-content { position: relative; z-index: 1; }
+
+.tech-intro {
+  max-width: 780px;
+  margin-bottom: var(--s-6);
+}
+.tech-intro h2 {
+  margin: var(--s-3) 0;
+  max-width: 22ch;
+  font-weight: 300;
+}
+.tech-intro p {
+  font-size: 1.05rem;
+  color: var(--text);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* === Comparativo Mercado vs LHM === */
+.tech-compare {
+  margin-bottom: var(--s-6);
+  border: 1px solid var(--line-strong);
+  background: var(--bg-raised);
+}
+.tech-compare-head {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  background: var(--bg-deep);
+  border-bottom: 1px solid var(--line-strong);
+}
+.tech-compare-head > div {
+  padding: var(--s-3) var(--s-3);
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.tech-compare-head > div + div {
+  border-left: 1px solid var(--line);
+  text-align: center;
+}
+.tech-compare-head .col-market { color: var(--danger); }
+.tech-compare-head .col-lhm { color: var(--gold); }
+
+.tech-compare-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s var(--ease);
+}
+.tech-compare-row:last-child { border-bottom: none; }
+.tech-compare-row:hover { background: var(--bg-accent); }
+
+.tech-compare-row > div {
+  padding: var(--s-3);
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+.tech-compare-row > div + div {
+  border-left: 1px solid var(--line);
+  text-align: center;
+}
+.tech-compare-item {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text);
+  font-size: 1.1rem;
+}
+.tech-compare-market {
+  color: var(--text-muted);
+  font-family: var(--f-body);
+}
+.tech-compare-market .x-mark {
+  display: inline-block;
+  margin-right: 0.5rem;
+  color: var(--danger);
+  font-family: var(--f-mono);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.tech-compare-lhm {
+  color: var(--text);
+  font-family: var(--f-body);
+  font-weight: 500;
+}
+.tech-compare-lhm .check-mark {
+  display: inline-block;
+  margin-right: 0.5rem;
+  color: var(--gold);
+  font-family: var(--f-mono);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+.tech-compare-note {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-top: 0.3rem;
+  font-style: italic;
+  font-family: var(--f-display);
+  font-weight: 400;
+}
+
+/* === Lista de normas === */
+.tech-norms {
+  border-top: 1px solid var(--line-strong);
+  padding-top: var(--s-5);
+}
+.tech-norms-head {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--s-5);
+  margin-bottom: var(--s-4);
+  align-items: end;
+}
+.tech-norms-head h3 {
+  font-family: var(--f-display);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 400;
+  line-height: 1.1;
+  max-width: 14ch;
+}
+.tech-norms-head h3 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.tech-norms-head p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  max-width: 50ch;
+}
+
+.tech-norms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.tech-norm {
+  background: var(--bg);
+  padding: var(--s-3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: background 0.3s var(--ease);
+}
+.tech-norm:hover { background: var(--bg-raised); }
+.tech-norm-code {
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  font-weight: 500;
+}
+.tech-norm-desc {
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.45;
+}
+
+.tech-footer-note {
+  margin-top: var(--s-5);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 60ch;
+}
+.tech-footer-note span {
+  color: var(--gold);
+  font-style: normal;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-right: 0.6rem;
+}
+
+@media (max-width: 768px) {
+  .tech-compare-head,
+  .tech-compare-row {
+    grid-template-columns: 1fr;
+  }
+  .tech-compare-head > div + div,
+  .tech-compare-row > div + div {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    text-align: left;
+  }
+  .tech-compare-head > div {
+    padding: 0.85rem var(--s-3);
+  }
+  .tech-compare-row .tech-compare-item {
+    background: var(--bg-deep);
+    font-size: 1rem;
+    padding: 0.85rem var(--s-3);
+  }
+  .tech-norms-head { grid-template-columns: 1fr; gap: var(--s-3); }
+  .tech-norms-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
    14. NOVA SEÇÃO — DECISÃO / CONFRONTO
    "Somos para você se / Não somos se"
    Força o lead a se posicionar antes de abrir WhatsApp.
@@ -2103,6 +2333,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <ul class="nav-links" id="navLinks">
         <li><a href="#servicos">Escopo</a></li>
         <li><a href="#processo">Método</a></li>
+        <li><a href="#tecnico">Técnico</a></li>
         <li><a href="#tiny">Tiny</a></li>
         <li><a href="#cases">Cases</a></li>
         <li><a href="#faq">FAQ</a></li>
@@ -2636,6 +2867,162 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 <!-- =========================================================
+  ⭐ NOVA SEÇÃO — PADRÃO TÉCNICO
+
+  ESTRATÉGIA: cliente steel frame pesquisa antes de comprar.
+  Quer ver competência técnica real (especificação + norma).
+
+  ESTRUTURA:
+  ▸ Intro editorial (não vende — explica)
+  ▸ Comparativo "mercado vs LHM" (diferencial concreto)
+  ▸ Lista de 14 NBRs cumpridas
+
+  POR QUE FUNCIONA: 90% das construtoras steel frame fazem
+  gambiarra. Quem entende do sistema sabe disso. Mostrar
+  especificação correta = filtro técnico que separa LHM.
+========================================================= -->
+<section class="tech" id="tecnico">
+  <div class="container tech-content">
+    <div class="tech-intro fade-up">
+      <div class="eyebrow"><span class="meta-num" style="color: var(--concrete); margin-right: 0.75rem;">04 /</span>Padrão técnico</div>
+      <h2>Steel frame não admite improviso. <em class="italic serif">Por isso, controlamos a especificação.</em></h2>
+      <p>Quem pesquisa steel frame com seriedade descobre rápido: o sistema só entrega o que promete quando cada componente é correto. <strong style="color: var(--gold); font-weight: 400;">Substituir um item para baratear compromete o conjunto inteiro.</strong> Por isso trabalhamos sempre com a especificação técnica certa — não com o que "também serve".</p>
+    </div>
+
+    <!-- Comparativo Mercado vs LHM -->
+    <div class="tech-compare fade-up">
+      <div class="tech-compare-head">
+        <div>Componente</div>
+        <div class="col-market">↳ O que muitos usam</div>
+        <div class="col-lhm">↳ Padrão LHM</div>
+      </div>
+
+      <div class="tech-compare-row">
+        <div class="tech-compare-item">Aço estrutural</div>
+        <div class="tech-compare-market"><span class="x-mark">—</span>Galvanização básica</div>
+        <div class="tech-compare-lhm"><span class="check-mark">+</span>Aço Z350<span class="tech-compare-note">Maior proteção contra corrosão</span></div>
+      </div>
+
+      <div class="tech-compare-row">
+        <div class="tech-compare-item">Substrato estrutural</div>
+        <div class="tech-compare-market"><span class="x-mark">—</span>Maderite (compromete em umidade)</div>
+        <div class="tech-compare-lhm"><span class="check-mark">+</span>OSB estrutural certificado<span class="tech-compare-note">Resistência e estabilidade dimensional</span></div>
+      </div>
+
+      <div class="tech-compare-row">
+        <div class="tech-compare-item">Placas externas</div>
+        <div class="tech-compare-market"><span class="x-mark">—</span>Placas comuns / improvisadas</div>
+        <div class="tech-compare-lhm"><span class="check-mark">+</span>GWD ou Grasroc X<span class="tech-compare-note">Específicas para steel frame</span></div>
+      </div>
+
+      <div class="tech-compare-row">
+        <div class="tech-compare-item">Basecoat de fachada</div>
+        <div class="tech-compare-market"><span class="x-mark">—</span>AC3 (não compatível com sistema)</div>
+        <div class="tech-compare-lhm"><span class="check-mark">+</span>Basecoat técnico para steel frame<span class="tech-compare-note">Aderência e flexibilidade corretas</span></div>
+      </div>
+
+      <div class="tech-compare-row">
+        <div class="tech-compare-item">Parafusos estruturais</div>
+        <div class="tech-compare-market"><span class="x-mark">—</span>Galvanização padrão</div>
+        <div class="tech-compare-lhm"><span class="check-mark">+</span>Ruspert<sup style="font-size:0.7em;">®</sup> anticorrosivo<span class="tech-compare-note">Resistência testada em névoa salina</span></div>
+      </div>
+
+      <div class="tech-compare-row">
+        <div class="tech-compare-item">Fixadores</div>
+        <div class="tech-compare-market"><span class="x-mark">—</span>Aço carbono comum</div>
+        <div class="tech-compare-lhm"><span class="check-mark">+</span>Aço inoxidável<span class="tech-compare-note">Sem oxidação ao longo dos anos</span></div>
+      </div>
+
+      <div class="tech-compare-row">
+        <div class="tech-compare-item">Tratamento de superfície</div>
+        <div class="tech-compare-market"><span class="x-mark">—</span>Aplicação parcial</div>
+        <div class="tech-compare-lhm"><span class="check-mark">+</span>Tela de tratamento total<span class="tech-compare-note">Toda a superfície externa</span></div>
+      </div>
+
+      <div class="tech-compare-row">
+        <div class="tech-compare-item">Isolamento termoacústico</div>
+        <div class="tech-compare-market"><span class="x-mark">—</span>Cortado para reduzir custo</div>
+        <div class="tech-compare-lhm"><span class="check-mark">+</span>Sistema completo<span class="tech-compare-note">Banda acústica em pontos estruturais</span></div>
+      </div>
+    </div>
+
+    <!-- Lista de Normas Técnicas -->
+    <div class="tech-norms fade-up">
+      <div class="tech-norms-head">
+        <div>
+          <h3>Cumpridas em <em>cada obra</em>.</h3>
+        </div>
+        <div>
+          <p>Não basta usar o material certo — a execução também precisa estar dentro da norma. As 14 ABNT abaixo orientam cada etapa do nosso processo, do projeto à entrega.</p>
+        </div>
+      </div>
+
+      <div class="tech-norms-grid">
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 15253</span>
+          <span class="tech-norm-desc">Perfis de aço formados a frio para sistemas em chapas de gesso</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 14715</span>
+          <span class="tech-norm-desc">Chapas de gesso para drywall — requisitos e ensaios</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 15758</span>
+          <span class="tech-norm-desc">Sistemas em chapas de gesso — projeto e procedimentos executivos</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 6355</span>
+          <span class="tech-norm-desc">Perfis estruturais de aço formados a frio</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 6123</span>
+          <span class="tech-norm-desc">Forças devidas ao vento em edificações</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 8800</span>
+          <span class="tech-norm-desc">Projeto de estruturas de aço e mistas de aço e concreto</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 15575</span>
+          <span class="tech-norm-desc">Norma de desempenho das edificações habitacionais</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 15575-3</span>
+          <span class="tech-norm-desc">Desempenho estrutural e acústico de sistemas de vedação</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 7190</span>
+          <span class="tech-norm-desc">Aplicações estruturais de OSB e elementos derivados de madeira</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 10821</span>
+          <span class="tech-norm-desc">Esquadrias para edificações</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 9575</span>
+          <span class="tech-norm-desc">Impermeabilização — seleção e projeto</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 9574</span>
+          <span class="tech-norm-desc">Execução de impermeabilização</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR 10152</span>
+          <span class="tech-norm-desc">Desempenho acústico em edificações</span>
+        </div>
+        <div class="tech-norm">
+          <span class="tech-norm-code">ABNT NBR ISO 9227</span>
+          <span class="tech-norm-desc">Ensaio de névoa salina para fixadores e componentes metálicos</span>
+        </div>
+      </div>
+
+      <p class="tech-footer-note"><span>↳ Memorial técnico</span>Cada projeto recebe o memorial descritivo completo na assinatura do contrato, com a especificação detalhada de todos os componentes e referências às normas correspondentes.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- =========================================================
   ⭐ NOVA SEÇÃO — MINI-CASES (substitui depoimentos soltos)
   
   ESTRUTURA DE CADA CASE:
@@ -3009,6 +3396,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <ul>
           <li><a href="#servicos">Escopo</a></li>
           <li><a href="#processo">Método</a></li>
+          <li><a href="#tecnico">Padrão Técnico</a></li>
           <li><a href="#tiny">Tiny House</a></li>
           <li><a href="#cases">Cases</a></li>
           <li><a href="#faq">FAQ</a></li>
