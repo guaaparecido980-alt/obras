@@ -2433,8 +2433,19 @@ footer { background: var(--bg); padding: var(--s-6) 0 var(--s-3); border-top: 1p
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  /* CSS fallback: se JS falhar completamente, anima após 2.5s
+     Não substitui o JS — apenas garante que nada fica invisível pra sempre */
+  animation: fadeUpFallback 0.9s var(--ease) 2.5s forwards;
 }
-.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+  /* Se JS já marcou visible, cancela a animação fallback */
+  animation: none;
+}
+@keyframes fadeUpFallback {
+  to { opacity: 1; transform: translateY(0); }
+}
 .stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2442,7 +2453,7 @@ footer { background: var(--bg); padding: var(--s-6) 0 var(--s-3); border-top: 1p
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-  .fade-up { opacity: 1; transform: none; }
+  .fade-up { opacity: 1; transform: none; animation: none; }
 }
 
 </style>
@@ -3675,52 +3686,101 @@ document.querySelectorAll('.faq-item').forEach(item => {
 });
 
 // ============================================================
-// Scroll-reveal via IntersectionObserver
+// SCROLL-REVEAL — versão definitiva mobile-safe
+// 3 camadas de proteção contra elementos presos em opacity:0
 // ============================================================
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      if (entry.target.classList.contains('stagger')) {
-        entry.target.querySelectorAll('.fade-up').forEach((el, i) => {
-          setTimeout(() => el.classList.add('visible'), i * 80);
-        });
-      }
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
+(function initScrollReveal() {
+  const targets = document.querySelectorAll('.fade-up:not(.visible)');
+  if (targets.length === 0) return;
 
-document.querySelectorAll('.fade-up').forEach((el) => {
-  if (!el.classList.contains('visible')) observer.observe(el);
-});
+  // Função core: mostra elementos no viewport ou que já passaram
+  // Usa rootMargin "virtual" de 150px — dispara ANTES do elemento entrar
+  function checkReveal() {
+    const wH = window.innerHeight;
+    const trigger = wH + 150; // dispara 150px antes de entrar
 
-// FALLBACK CRÍTICO: se por qualquer motivo o IntersectionObserver falhar
-// (scroll rápido, navegador antigo, timing ruim), força a visibilidade
-// de todos os elementos após 2 segundos. Garante que NADA fica invisível.
-setTimeout(() => {
-  document.querySelectorAll('.fade-up:not(.visible)').forEach(el => {
-    el.classList.add('visible');
-  });
-}, 2000);
-
-// FALLBACK ADICIONAL: no scroll, verifica se há elementos no viewport
-// que deveriam estar visíveis mas não estão (segurança extra)
-let scrollCheckPending = false;
-window.addEventListener('scroll', () => {
-  if (scrollCheckPending) return;
-  scrollCheckPending = true;
-  requestAnimationFrame(() => {
-    document.querySelectorAll('.fade-up:not(.visible)').forEach(el => {
+    document.querySelectorAll('.fade-up:not(.visible)').forEach(function(el) {
       const rect = el.getBoundingClientRect();
-      // se o elemento já está no viewport (ou já passou), mostra
-      if (rect.top < window.innerHeight && rect.bottom > 0) {
+      // Mostra se: já está dentro/passou OU está chegando (top < trigger)
+      if (rect.top < trigger && rect.bottom > -150) {
+        // Stagger: se for container .stagger, anima filhos em sequência
+        if (el.classList.contains('stagger')) {
+          el.classList.add('visible');
+          el.querySelectorAll('.fade-up:not(.visible)').forEach(function(child, i) {
+            setTimeout(function() { child.classList.add('visible'); }, i * 80);
+          });
+        } else {
+          el.classList.add('visible');
+        }
+      }
+    });
+  }
+
+  // CAMADA 1: IntersectionObserver com threshold MÍNIMO + rootMargin POSITIVO
+  // threshold 0.01 = dispara assim que 1px aparece (vs 12% antes)
+  // rootMargin 150px no fundo = começa antes do elemento entrar
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          if (el.classList.contains('stagger')) {
+            el.classList.add('visible');
+            el.querySelectorAll('.fade-up:not(.visible)').forEach(function(child, i) {
+              setTimeout(function() { child.classList.add('visible'); }, i * 80);
+            });
+          } else {
+            el.classList.add('visible');
+          }
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.01, rootMargin: '0px 0px 150px 0px' });
+
+    targets.forEach(function(el) { io.observe(el); });
+  }
+
+  // CAMADA 2: checkReveal manual em múltiplos timings
+  // Pega elementos que IO pula em scroll rápido OU que já estão na tela ao carregar
+  checkReveal();                       // imediato
+  setTimeout(checkReveal, 100);        // após first paint
+  setTimeout(checkReveal, 500);        // após render completo
+  setTimeout(checkReveal, 1500);       // após carregamento de fontes/imagens
+
+  // CAMADA 3: scroll listener throttled — rede de segurança
+  // Roda em todo scroll mas com throttle via requestAnimationFrame
+  let ticking = false;
+  function onScroll() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(function() {
+        checkReveal();
+        ticking = false;
+      });
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
+  // CAMADA 4 (último recurso): se 3s passou e ainda tem elemento invisível
+  // dentro do viewport, força. Garante que NADA fica preso pra sempre.
+  setTimeout(function() {
+    document.querySelectorAll('.fade-up:not(.visible)').forEach(function(el) {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 200) {
         el.classList.add('visible');
       }
     });
-    scrollCheckPending = false;
+  }, 3000);
+
+  // CAMADA 5: visibilitychange — se aba estava em background ao carregar
+  // (Safari mobile pausa IO nesse caso), revisa quando voltar ao foco
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') {
+      checkReveal();
+    }
   });
-}, { passive: true });
+})();
 
 // ============================================================
 // Nav compacta ao scroll
