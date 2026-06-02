@@ -43,24 +43,11 @@
 </script>
 
 <!-- ============================================================
-  META PIXEL (Facebook/Instagram Ads)
-  ⚠️ SUBSTITUIR 000000000000000 pelo ID do pixel quando criar
+  META PIXEL — gerenciado 100% pelo Google Tag Manager
+  (tags "Meta Pixel - Base" e "Meta Pixel - Lead WhatsApp").
+  O pixel embutido foi REMOVIDO para não duplicar eventos.
+  NÃO recolocar código de pixel aqui — usar sempre o GTM.
 ============================================================= -->
-<script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  // Só inicializa se usuário aceitar cookies (ver cookie-consent.js abaixo)
-  window.fbqInit = function(pixelId) {
-    fbq('init', pixelId);
-    fbq('track', 'PageView');
-  };
-</script>
 
 <!-- ============================================================
   SEO — Metas expandidas
@@ -3830,11 +3817,8 @@ document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
       cta_text: link.textContent.trim().substring(0, 50),
       timestamp: new Date().toISOString()
     });
-    // Meta Pixel (dispara só se consent dado)
-    if (window.fbq && window._consentGiven) {
-      fbq('track', 'Lead', { content_name: 'WhatsApp Click' });
-      fbq('track', 'Contact');
-    }
+    // Meta Pixel: o Lead é disparado pelo GTM (tag "Meta Pixel - Lead WhatsApp")
+    // a partir do evento lead_whatsapp_click acima. Não duplicar aqui.
   });
 });
 
@@ -3850,10 +3834,8 @@ window.addEventListener('scroll', () => {
         event: 'scroll_depth',
         scroll_percentage: milestone
       });
-      // Marca como "engajado" a partir de 75% de scroll
-      if (milestone === 75 && window.fbq && window._consentGiven) {
-        fbq('track', 'ViewContent', { content_name: 'High Intent Visitor' });
-      }
+      // (Se quiser, crie no GTM um ViewContent de engajamento a partir do
+      //  evento scroll_depth = 75 — não disparar pixel direto aqui.)
     }
   });
 }, { passive: true });
@@ -3861,9 +3843,7 @@ window.addEventListener('scroll', () => {
 // 3. Rastrear tempo mínimo de engajamento (60s = visitante de qualidade)
 setTimeout(() => {
   window.dataLayer.push({ event: 'quality_visit', duration_seconds: 60 });
-  if (window.fbq && window._consentGiven) {
-    fbq('track', 'ViewContent', { content_name: 'Quality Visit 60s' });
-  }
+  // (Se quiser, crie no GTM um ViewContent a partir do evento quality_visit.)
 }, 60000);
 
 // 4. Rastrear abertura de FAQ (indica interesse real)
@@ -3952,11 +3932,9 @@ function applyConsent(consent) {
     'ad_personalization': consent.ads ? 'granted' : 'denied',
     'analytics_storage': consent.analytics ? 'granted' : 'denied'
   });
-  // Dispara Pixel só se consent de ads
-  if (consent.ads && window.fbqInit) {
-    // ⚠️ SUBSTITUIR 000000000000000 pelo ID real do Meta Pixel
-    window.fbqInit('000000000000000');
-  }
+  // O Meta Pixel é disparado pelo GTM e respeita este consentimento (gtag consent update acima).
+  // IMPORTANTE (LGPD): confira nas tags do Pixel no GTM as "Consent Settings"
+  // exigindo ad_storage, para o pixel só disparar após o aceite de cookies.
 }
 
 function openCookieConfig(banner, currentConsent) {
