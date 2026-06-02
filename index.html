@@ -3932,9 +3932,14 @@ function applyConsent(consent) {
     'ad_personalization': consent.ads ? 'granted' : 'denied',
     'analytics_storage': consent.analytics ? 'granted' : 'denied'
   });
-  // O Meta Pixel é disparado pelo GTM e respeita este consentimento (gtag consent update acima).
-  // IMPORTANTE (LGPD): confira nas tags do Pixel no GTM as "Consent Settings"
-  // exigindo ad_storage, para o pixel só disparar após o aceite de cookies.
+  // Avisa o GTM que o consentimento de ANÚNCIOS foi concedido. A tag
+  // "Meta Pixel - Base" usa o gatilho de evento personalizado "consent_ads_granted"
+  // para LIGAR o pixel só depois do aceite (resolve o timing do Consent Mode:
+  // a Base não precisa mais depender do "All Pages" no carregamento).
+  if (consent.ads) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'consent_ads_granted' });
+  }
 }
 
 function openCookieConfig(banner, currentConsent) {
