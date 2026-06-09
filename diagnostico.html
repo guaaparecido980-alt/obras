@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ============================================================
+  GOOGLE CONSENT MODE v2 (LGPD) — herdado do site principal
+============================================================= -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'functionality_storage': 'granted',
+    'security_storage': 'granted',
+    'wait_for_update': 500
+  });
+  gtag('set', 'url_passthrough', true);
+  gtag('set', 'ads_data_redaction', true);
+</script>
+
+<!-- GOOGLE TAG MANAGER -->
+<script>
+  (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-MQVDGB9D');
+</script>
+
+<title>Análise de Viabilidade | LHM Engenharia — Steel Frame em Curitiba</title>
+<meta name="description" content="Solicite a Análise de Viabilidade do seu projeto com a LHM Engenharia. Processo estruturado, sigiloso e direto com o engenheiro responsável. Atendemos no máximo 6 obras por ano." />
+<meta name="robots" content="noindex, follow" />
+<link rel="canonical" href="https://lhmsteelframe.com.br/diagnostico.html" />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="theme-color" content="#08080A" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="LHM Engenharia" />
+<meta property="og:title" content="Análise de Viabilidade — LHM Engenharia" />
+<meta property="og:description" content="O primeiro passo para construir com a LHM. Processo estruturado e direto com o engenheiro responsável." />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:url" content="https://lhmsteelframe.com.br/diagnostico.html" />
+<meta property="og:image" content="https://lhmsteelframe.com.br/og-image.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="dns-prefetch" href="https://wa.me" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ============================================================
+   DESIGN SYSTEM — espelha o index.html da LHM
+============================================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #08080A;
+  --bg-raised:    #111113;
+  --bg-accent:    #17171A;
+  --bg-deep:      #050506;
+  --paper:        #F5F1EA;
+  --gold:         #C8A968;
+  --gold-bright:  #E8C987;
+  --gold-deep:    #8B7340;
+  --concrete:     #8B8680;
+  --line:         rgba(245, 241, 234, 0.07);
+  --line-strong:  rgba(245, 241, 234, 0.14);
+  --line-gold:    rgba(200, 169, 104, 0.25);
+  --text:         #FAFAFA;
+  --text-muted:   #A8A5A0;
+  --text-dim:     #6A6760;
+  --danger:       #D4614A;
+  --success:      #8FA577;
+  --whatsapp:     #25D366;
+  --f-display: 'Fraunces', 'Times New Roman', serif;
+  --f-body:    'Inter Tight', -apple-system, sans-serif;
+  --f-mono:    'JetBrains Mono', ui-monospace, monospace;
+  --s-1: 0.5rem; --s-2: 1rem; --s-3: 1.5rem; --s-4: 2rem; --s-5: 3rem; --s-6: 4rem;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--f-body);
+  line-height: 1.55;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-feature-settings: "ss01", "cv11";
+}
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+::selection { background: var(--gold); color: var(--bg); }
+
+h1, h2, h3 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+.italic { font-style: italic; color: var(--gold); }
+
+/* Fundo: grid técnico sutil (igual seção "status" do site) */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 10%, transparent 70%);
+  opacity: 0.5;
+}
+
+/* ============================================================
+   TOPO — minimalista (sem menu, pra não distrair)
+============================================================= */
+.topbar {
+  position: relative; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s-3) var(--s-4);
+  max-width: 1100px; margin: 0 auto; width: 100%;
+}
+.brand { display: flex; align-items: center; gap: 0.65rem; font-family: var(--f-display); font-size: 1.2rem; font-weight: 500; }
+.brand svg { width: 34px; height: 34px; flex-shrink: 0; }
+.back-link {
+  font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-muted);
+  display: inline-flex; align-items: center; gap: 0.5rem; transition: color 0.2s;
+}
+.back-link:hover { color: var(--gold); }
+
+/* ============================================================
+   LAYOUT PRINCIPAL — duas colunas (prova de confiança + form)
+============================================================= */
+.wrap {
+  position: relative; z-index: 2;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  padding: var(--s-3) var(--s-4) var(--s-6);
+  display: grid; grid-template-columns: 0.85fr 1.15fr; gap: var(--s-6);
+  align-items: start;
+}
+@media (max-width: 880px) {
+  .wrap { grid-template-columns: 1fr; gap: var(--s-4); padding-bottom: var(--s-5); }
+}
+
+/* ----- COLUNA ESQUERDA: contexto + confiança ----- */
+.aside { position: sticky; top: var(--s-3); }
+@media (max-width: 880px) { .aside { position: static; } }
+
+.scarcity {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.4rem 0.85rem; margin-bottom: var(--s-3);
+  border: 1px solid var(--gold); color: var(--gold);
+  font-family: var(--f-mono); font-size: 0.66rem; letter-spacing: 0.14em;
+  text-transform: uppercase; font-weight: 500; background: rgba(200, 169, 104, 0.04);
+}
+.scarcity .dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse {
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(200,169,104,0.4); }
+  50% { opacity: 0.5; box-shadow: 0 0 0 8px rgba(200,169,104,0); }
+}
+
+.aside h1 { font-size: clamp(2rem, 3.5vw, 2.9rem); font-weight: 300; margin-bottom: var(--s-3); }
+.aside h1 em { font-style: italic; color: var(--gold); }
+.aside-lead { font-size: 1.05rem; color: var(--text); font-weight: 300; margin-bottom: var(--s-4); max-width: 42ch; }
+
+.trust-list { list-style: none; border-top: 1px solid var(--line); margin-bottom: var(--s-4); }
+.trust-list li {
+  display: flex; gap: 0.85rem; align-items: flex-start;
+  padding: var(--s-2) 0; border-bottom: 1px solid var(--line);
+  font-size: 0.92rem; color: var(--text-muted);
+}
+.trust-list li svg { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+.trust-list li strong { color: var(--text); font-weight: 500; }
+
+.privacy-note {
+  display: flex; gap: 0.7rem; align-items: flex-start;
+  font-size: 0.8rem; color: var(--text-dim); line-height: 1.5;
+  padding: var(--s-2); border: 1px solid var(--line); background: var(--bg-raised);
+}
+.privacy-note svg { width: 16px; height: 16px; color: var(--success); flex-shrink: 0; margin-top: 2px; }
+
+/* ----- COLUNA DIREITA: o formulário ----- */
+.form-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--line-strong);
+  padding: var(--s-4);
+  position: relative;
+}
+@media (max-width: 600px) { .form-card { padding: var(--s-3); } }
+
+/* Barra de progresso */
+.progress-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: var(--s-1); }
+.progress-step { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.progress-time { font-family: var(--f-mono); font-size: 0.68rem; color: var(--text-dim); letter-spacing: 0.08em; }
+.progress-track { height: 3px; background: var(--bg-accent); margin-bottom: var(--s-4); overflow: hidden; }
+.progress-fill { height: 100%; background: var(--gold); width: 25%; transition: width 0.5s var(--ease); }
+
+/* Passos */
+.step { display: none; animation: fadeIn 0.4s var(--ease); }
+.step.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.step-q { font-family: var(--f-display); font-size: 1.5rem; font-weight: 400; margin-bottom: 0.4rem; line-height: 1.15; }
+.step-q em { font-style: italic; color: var(--gold); }
+.step-help { font-size: 0.88rem; color: var(--text-muted); margin-bottom: var(--s-3); }
+
+/* Cartões de opção (radio premium) */
+.options { display: grid; gap: 0.6rem; margin-bottom: var(--s-3); }
+.options.two { grid-template-columns: 1fr 1fr; }
+@media (max-width: 480px) { .options.two { grid-template-columns: 1fr; } }
+.opt { position: relative; }
+.opt input { position: absolute; opacity: 0; pointer-events: none; }
+.opt label {
+  display: flex; align-items: center; gap: 0.85rem;
+  padding: 0.95rem 1.1rem;
+  border: 1px solid var(--line-strong); background: var(--bg);
+  font-size: 0.95rem; color: var(--text); cursor: pointer;
+  transition: all 0.2s var(--ease); height: 100%;
+}
+.opt label .tick {
+  width: 18px; height: 18px; border: 1px solid var(--line-strong); border-radius: 50%;
+  flex-shrink: 0; display: grid; place-items: center; transition: all 0.2s;
+}
+.opt label .tick::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); transform: scale(0); transition: transform 0.2s; }
+.opt label:hover { border-color: var(--line-gold); background: var(--bg-accent); }
+.opt input:checked + label { border-color: var(--gold); background: rgba(200,169,104,0.07); }
+.opt input:checked + label .tick { border-color: var(--gold); }
+.opt input:checked + label .tick::after { transform: scale(1); }
+.opt input:focus-visible + label { outline: 2px solid var(--gold); outline-offset: 2px; }
+.opt .opt-sub { display: block; font-size: 0.76rem; color: var(--text-dim); margin-top: 2px; }
+
+/* Campos de texto */
+.field { margin-bottom: var(--s-3); }
+.field label.flabel {
+  display: block; font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem;
+}
+.field label .req { color: var(--gold); }
+.field input, .field textarea {
+  width: 100%; padding: 0.85rem 1rem;
+  background: var(--bg); border: 1px solid var(--line-strong); color: var(--text);
+  font-family: var(--f-body); font-size: 0.98rem; transition: border-color 0.2s;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--text-dim); }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--gold); }
+.field textarea { resize: vertical; min-height: 88px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2); }
+@media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
+
+.err { color: var(--danger); font-size: 0.82rem; margin-top: 0.4rem; display: none; }
+.err.show { display: block; }
+
+/* Navegação do form */
+.form-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); margin-top: var(--s-4); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  padding: 1rem 1.7rem; font-size: 0.92rem; font-weight: 500; letter-spacing: 0.01em;
+  transition: all 0.25s var(--ease); cursor: pointer;
+}
+.btn-primary { background: var(--gold); color: var(--bg); }
+.btn-primary:hover { background: var(--gold-bright); transform: translateY(-1px); }
+.btn-primary:active { background: var(--gold-deep); transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+.btn-ghost { color: var(--text-muted); border: 1px solid var(--line-strong); background: transparent; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+.btn-ghost.hidden { visibility: hidden; }
+.btn .arrow { transition: transform 0.25s var(--ease); }
+.btn-primary:hover .arrow { transform: translateX(4px); }
+
+/* Nota do anteprojeto (define expectativa = filtro) */
+.fee-note {
+  margin-top: var(--s-3); padding: var(--s-2) var(--s-3);
+  border-left: 2px solid var(--gold); background: var(--bg);
+  font-size: 0.82rem; color: var(--text-muted); line-height: 1.55;
+}
+.fee-note strong { color: var(--gold); font-weight: 500; }
+
+/* Tela de sucesso */
+.success { display: none; text-align: center; padding: var(--s-4) var(--s-2); }
+.success.active { display: block; animation: fadeIn 0.5s var(--ease); }
+.success-mark {
+  width: 64px; height: 64px; margin: 0 auto var(--s-3);
+  border: 1px solid var(--gold); border-radius: 50%; display: grid; place-items: center; color: var(--gold);
+}
+.success h2 { font-size: 1.8rem; font-weight: 400; margin-bottom: var(--s-2); }
+.success h2 em { font-style: italic; color: var(--gold); }
+.success p { color: var(--text-muted); max-width: 40ch; margin: 0 auto var(--s-4); }
+.success .btn-wa {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  padding: 1.05rem 2rem; background: var(--whatsapp); color: #07260f;
+  font-weight: 600; font-size: 0.98rem;
+}
+.success .btn-wa:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.success .small { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-top: var(--s-3); }
+
+footer.mini {
+  position: relative; z-index: 2;
+  border-top: 1px solid var(--line); padding: var(--s-3) var(--s-4);
+  max-width: 1100px; margin: 0 auto; width: 100%;
+  display: flex; flex-wrap: wrap; gap: var(--s-2); justify-content: space-between;
+  font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.06em; color: var(--text-dim);
+}
+footer.mini a { color: var(--text-muted); }
+footer.mini a:hover { color: var(--gold); }
+</style>
+</head>
+
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MQVDGB9D" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<div class="bg-grid"></div>
+
+<!-- TOPO -->
+<header class="topbar">
+  <a href="/" class="brand" aria-label="LHM Engenharia — voltar ao início">
+    <svg viewBox="0 0 120 120" fill="none" aria-hidden="true"><rect x="0" y="0" width="120" height="120" stroke="#C8A968" stroke-width="2.5" fill="transparent"/><rect x="10" y="10" width="100" height="100" stroke="#C8A968" stroke-width="1" fill="none" opacity="0.4"/><path d="M 25 35 L 25 85 L 50 85" stroke="#C8A968" stroke-width="3" stroke-linecap="square" fill="none"/><path d="M 55 35 L 55 85 M 55 60 L 75 60 M 75 35 L 75 85" stroke="#C8A968" stroke-width="3" stroke-linecap="square" fill="none"/><path d="M 80 85 L 80 35 L 90 65 L 100 35 L 100 85" stroke="#C8A968" stroke-width="3" stroke-linecap="square" fill="none" stroke-linejoin="miter"/></svg>
+    <span>Engenharia</span>
+  </a>
+  <a href="/" class="back-link">← Voltar ao site</a>
+</header>
+
+<main class="wrap">
+
+  <!-- ESQUERDA: contexto + confiança -->
+  <aside class="aside">
+    <span class="scarcity"><span class="dot"></span>Máximo 6 obras por ano</span>
+    <h1>Análise de <em>Viabilidade</em></h1>
+    <p class="aside-lead">O primeiro passo para construir com a LHM. Você responde algumas perguntas e o engenheiro responsável avalia seu projeto pessoalmente — não um atendente com script.</p>
+
+    <ul class="trust-list">
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+        <span><strong>12 anos</strong> de engenharia e 80+ obras entregues — nenhuma atrasada nos últimos 5 anos.</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+        <span>Quem te responde é o <strong>engenheiro responsável</strong>, registrado no CREA-PR.</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+        <span><strong>Escopo fechado:</strong> o valor que você assina é o valor que paga — sem aditivo depois.</span>
+      </li>
+      <li>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>
+        <span>Retorno em até <strong>2 horas úteis</strong> após o envio.</span>
+      </li>
+    </ul>
+
+    <div class="privacy-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+      <span>Seus dados são tratados com <strong style="color:var(--text)">sigilo absoluto</strong> e usados apenas para avaliar seu projeto. Nunca compartilhamos com terceiros. (LGPD)</span>
+    </div>
+  </aside>
+
+  <!-- DIREITA: o formulário -->
+  <section class="form-card">
+    <form id="diagForm" novalidate>
+      <!-- Progresso -->
+      <div class="progress-head">
+        <span class="progress-step" id="progressStep">Etapa 1 de 4</span>
+        <span class="progress-time">leva menos de 1 minuto</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+      <!-- ETAPA 1 — Tipo de projeto -->
+      <div class="step active" data-step="1">
+        <h3 class="step-q">O que você pretende <em>construir</em>?</h3>
+        <p class="step-help">Selecione o que mais se aproxima do seu projeto.</p>
+        <div class="options" role="radiogroup">
+          <div class="opt"><input type="radio" id="t1" name="tipo" value="Casa em Steel Frame" required><label for="t1"><span class="tick"></span>Casa em Steel Frame</label></div>
+          <div class="opt"><input type="radio" id="t2" name="tipo" value="Casa em Alvenaria"><label for="t2"><span class="tick"></span>Casa em Alvenaria convencional</label></div>
+          <div class="opt"><input type="radio" id="t3" name="tipo" value="Tiny House"><label for="t3"><span class="tick"></span>Tiny House <span class="opt-sub">Segunda residência, litoral, locação</span></label></div>
+          <div class="opt"><input type="radio" id="t4" name="tipo" value="Obra Comercial"><label for="t4"><span class="tick"></span>Obra comercial</label></div>
+          <div class="opt"><input type="radio" id="t5" name="tipo" value="Ampliação / Reforma"><label for="t5"><span class="tick"></span>Ampliação ou reforma estrutural</label></div>
+        </div>
+        <p class="err" data-err="tipo">Selecione uma opção para continuar.</p>
+      </div>
+
+      <!-- ETAPA 2 — Terreno + projeto -->
+      <div class="step" data-step="2">
+        <h3 class="step-q">Sobre o <em>terreno</em> e o projeto.</h3>
+        <p class="step-help">Isso define o ponto de partida da engenharia.</p>
+
+        <p class="step-help" style="color:var(--text);margin-bottom:0.5rem;font-weight:500">Você já tem o terreno?</p>
+        <div class="options two" role="radiogroup">
+          <div class="opt"><input type="radio" id="te1" name="terreno" value="Sim, já tenho" required><label for="te1"><span class="tick"></span>Sim, já tenho</label></div>
+          <div class="opt"><input type="radio" id="te2" name="terreno" value="Em negociação"><label for="te2"><span class="tick"></span>Em negociação</label></div>
+          <div class="opt"><input type="radio" id="te3" name="terreno" value="Ainda vou comprar"><label for="te3"><span class="tick"></span>Ainda vou comprar</label></div>
+          <div class="opt"><input type="radio" id="te4" name="terreno" value="Vou construir em terreno próprio existente"><label for="te4"><span class="tick"></span>Terreno próprio já edificável</label></div>
+        </div>
+        <p class="err" data-err="terreno">Selecione uma opção.</p>
+
+        <p class="step-help" style="color:var(--text);margin:var(--s-3) 0 0.5rem;font-weight:500">Você já tem o projeto arquitetônico?</p>
+        <div class="options" role="radiogroup">
+          <div class="opt"><input type="radio" id="pr1" name="projeto" value="Sim, projeto completo" required><label for="pr1"><span class="tick"></span>Sim, tenho projeto completo</label></div>
+          <div class="opt"><input type="radio" id="pr2" name="projeto" value="Tenho uma planta/ideia inicial"><label for="pr2"><span class="tick"></span>Tenho uma planta ou ideia inicial</label></div>
+          <div class="opt"><input type="radio" id="pr3" name="projeto" value="Não tenho — preciso do projeto também"><label for="pr3"><span class="tick"></span>Não tenho — preciso do projeto também <span class="opt-sub">A LHM desenvolve o projeto para você</span></label></div>
+        </div>
+        <p class="err" data-err="projeto">Selecione uma opção.</p>
+      </div>
+
+      <!-- ETAPA 3 — Escala, orçamento, prazo -->
+      <div class="step" data-step="3">
+        <h3 class="step-q">Escala e <em>investimento</em>.</h3>
+        <p class="step-help">Trabalhamos com escopo fechado — saber a faixa nos ajuda a dimensionar a proposta certa para você.</p>
+
+        <div class="field">
+          <label class="flabel" for="area">Metragem aproximada <span class="req">*</span></label>
+          <input type="text" id="area" name="area" inputmode="numeric" placeholder="Ex.: 120 m²" autocomplete="off" required>
+          <p class="err" data-err="area">Informe a metragem aproximada.</p>
+        </div>
+
+        <p class="step-help" style="color:var(--text);margin-bottom:0.5rem;font-weight:500">Faixa de investimento prevista <span style="color:var(--gold)">*</span></p>
+        <div class="options two" role="radiogroup">
+          <div class="opt"><input type="radio" id="o1" name="orcamento" value="Até R$ 150 mil" required><label for="o1"><span class="tick"></span>Até R$ 150 mil</label></div>
+          <div class="opt"><input type="radio" id="o2" name="orcamento" value="R$ 150 mil a R$ 300 mil"><label for="o2"><span class="tick"></span>R$ 150 a 300 mil</label></div>
+          <div class="opt"><input type="radio" id="o3" name="orcamento" value="R$ 300 mil a R$ 600 mil"><label for="o3"><span class="tick"></span>R$ 300 a 600 mil</label></div>
+          <div class="opt"><input type="radio" id="o4" name="orcamento" value="R$ 600 mil a R$ 1 milhão"><label for="o4"><span class="tick"></span>R$ 600 mil a 1 mi</label></div>
+          <div class="opt"><input type="radio" id="o5" name="orcamento" value="Acima de R$ 1 milhão"><label for="o5"><span class="tick"></span>Acima de R$ 1 mi</label></div>
+          <div class="opt"><input type="radio" id="o6" name="orcamento" value="Ainda não defini"><label for="o6"><span class="tick"></span>Ainda não defini</label></div>
+        </div>
+        <p class="err" data-err="orcamento">Selecione uma faixa.</p>
+
+        <p class="step-help" style="color:var(--text);margin:var(--s-3) 0 0.5rem;font-weight:500">Quando pretende iniciar? <span style="color:var(--gold)">*</span></p>
+        <div class="options two" role="radiogroup">
+          <div class="opt"><input type="radio" id="pz1" name="prazo" value="Imediato (até 3 meses)" required><label for="pz1"><span class="tick"></span>Imediato (até 3 meses)</label></div>
+          <div class="opt"><input type="radio" id="pz2" name="prazo" value="3 a 6 meses"><label for="pz2"><span class="tick"></span>3 a 6 meses</label></div>
+          <div class="opt"><input type="radio" id="pz3" name="prazo" value="6 a 12 meses"><label for="pz3"><span class="tick"></span>6 a 12 meses</label></div>
+          <div class="opt"><input type="radio" id="pz4" name="prazo" value="Ainda estudando"><label for="pz4"><span class="tick"></span>Ainda estudando</label></div>
+        </div>
+        <p class="err" data-err="prazo">Selecione um prazo.</p>
+      </div>
+
+      <!-- ETAPA 4 — Contato -->
+      <div class="step" data-step="4">
+        <h3 class="step-q">Para onde enviamos sua <em>análise</em>?</h3>
+        <p class="step-help">O engenheiro responsável entra em contato pessoalmente.</p>
+
+        <div class="field">
+          <label class="flabel" for="nome">Nome completo <span class="req">*</span></label>
+          <input type="text" id="nome" name="nome" placeholder="Seu nome" autocomplete="name" required>
+          <p class="err" data-err="nome">Informe seu nome.</p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label class="flabel" for="whatsapp">WhatsApp <span class="req">*</span></label>
+            <input type="tel" id="whatsapp" name="whatsapp" inputmode="tel" placeholder="(41) 99999-9999" autocomplete="tel" required>
+            <p class="err" data-err="whatsapp">Informe um WhatsApp válido.</p>
+          </div>
+          <div class="field">
+            <label class="flabel" for="cidade">Cidade do projeto <span class="req">*</span></label>
+            <input type="text" id="cidade" name="cidade" placeholder="Ex.: Curitiba" autocomplete="address-level2" required>
+            <p class="err" data-err="cidade">Informe a cidade.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="flabel" for="email">E-mail <span style="color:var(--text-dim);text-transform:none;letter-spacing:0">(opcional)</span></label>
+          <input type="email" id="email" name="email" placeholder="seu@email.com" autocomplete="email">
+        </div>
+
+        <div class="field">
+          <label class="flabel" for="mensagem">Conte um pouco da sua visão <span style="color:var(--text-dim);text-transform:none;letter-spacing:0">(opcional)</span></label>
+          <textarea id="mensagem" name="mensagem" placeholder="Ex.: quero uma casa de 3 quartos, pé-direito alto, no litoral…"></textarea>
+        </div>
+
+        <div class="fee-note">
+          <strong>Como funciona:</strong> após a análise, projetos aprovados seguem para um <strong>Estudo de Viabilidade técnico</strong>. Quando há contrato de obra, o valor do estudo é <strong>integralmente abatido</strong> da sua obra. É assim que garantimos dedicação real a cada cliente — e não atendimento de esteira.
+        </div>
+      </div>
+
+      <!-- Honeypot anti-spam (invisível) -->
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <!-- Navegação -->
+      <div class="form-nav">
+        <button type="button" class="btn btn-ghost hidden" id="btnBack">← Voltar</button>
+        <button type="button" class="btn btn-primary" id="btnNext">Continuar <span class="arrow">→</span></button>
+        <button type="submit" class="btn btn-primary" id="btnSubmit" style="display:none">Enviar análise <span class="arrow">→</span></button>
+      </div>
+    </form>
+
+    <!-- SUCESSO -->
+    <div class="success" id="success">
+      <div class="success-mark">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12l5 5L20 7"/></svg>
+      </div>
+      <h2>Recebemos seu <em>projeto</em>.</h2>
+      <p>O engenheiro responsável já foi notificado e retorna em até 2 horas úteis. Quer adiantar? Continue agora pelo WhatsApp — seu resumo já vai preenchido.</p>
+      <a href="#" class="btn-wa" id="waContinue" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Continuar no WhatsApp
+      </a>
+      <p class="small">Resposta direta com o engenheiro · Sem vendedor</p>
+    </div>
+  </section>
+</main>
+
+<footer class="mini">
+  <span>© 2026 LHM Engenharia · CREA-PR</span>
+  <span><a href="/privacidade.html">Privacidade</a> · <a href="/termos.html">Termos</a> · <a href="https://wa.me/5541998822772" target="_blank" rel="noopener">WhatsApp (41) 99882-2772</a></span>
+</footer>
+
+<script>
+// ============================================================
+//  Configuração — TROQUE AQUI se quiser outro destino
+// ============================================================
+var LEAD_EMAIL   = "contato@lhmsteelframe.com.br"; // recebe os leads por e-mail (FormSubmit)
+var WA_NUMBER    = "5541998822772";                // WhatsApp da LHM
+var TOTAL_STEPS  = 4;
+
+var form = document.getElementById('diagForm');
+var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+var current = 1;
+
+var btnBack   = document.getElementById('btnBack');
+var btnNext   = document.getElementById('btnNext');
+var btnSubmit = document.getElementById('btnSubmit');
+var fill      = document.getElementById('progressFill');
+var stepLabel = document.getElementById('progressStep');
+
+function showStep(n) {
+  current = n;
+  steps.forEach(function(s){ s.classList.toggle('active', Number(s.dataset.step) === n); });
+  fill.style.width = (n / TOTAL_STEPS * 100) + '%';
+  stepLabel.textContent = 'Etapa ' + n + ' de ' + TOTAL_STEPS;
+  btnBack.classList.toggle('hidden', n === 1);
+  btnNext.style.display   = (n === TOTAL_STEPS) ? 'none' : 'inline-flex';
+  btnSubmit.style.display = (n === TOTAL_STEPS) ? 'inline-flex' : 'none';
+  // foca o topo do cartão para não "pular" a tela no mobile
+  document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Validação por etapa
+function validateStep(n) {
+  var ok = true;
+  var stepEl = steps.find(function(s){ return Number(s.dataset.step) === n; });
+  // limpa erros
+  stepEl.querySelectorAll('.err').forEach(function(e){ e.classList.remove('show'); });
+
+  // radios obrigatórios
+  var groups = {};
+  stepEl.querySelectorAll('input[type=radio][required]').forEach(function(r){ groups[r.name] = true; });
+  Object.keys(groups).forEach(function(name){
+    var checked = stepEl.querySelector('input[name="'+name+'"]:checked');
+    if (!checked) {
+      ok = false;
+      var e = stepEl.querySelector('.err[data-err="'+name+'"]');
+      if (e) e.classList.add('show');
+    }
+  });
+
+  // campos texto obrigatórios
+  stepEl.querySelectorAll('input[required]:not([type=radio])').forEach(function(inp){
+    var val = inp.value.trim();
+    var valid = !!val;
+    if (inp.type === 'tel') valid = val.replace(/\D/g,'').length >= 10; // pelo menos DDD + número
+    if (!valid) {
+      ok = false;
+      var e = stepEl.querySelector('.err[data-err="'+inp.name+'"]');
+      if (e) e.classList.add('show');
+    }
+  });
+  return ok;
+}
+
+btnNext.addEventListener('click', function(){
+  if (validateStep(current)) showStep(current + 1);
+});
+btnBack.addEventListener('click', function(){
+  if (current > 1) showStep(current - 1);
+});
+
+// Avança automaticamente ao escolher um radio na etapa 1 (UX fluida)
+steps[0].querySelectorAll('input[name="tipo"]').forEach(function(r){
+  r.addEventListener('change', function(){ setTimeout(function(){ showStep(2); }, 250); });
+});
+
+// Monta o resumo legível dos dados
+function getData() {
+  var fd = new FormData(form);
+  function v(name){ return (fd.get(name) || '').toString().trim(); }
+  return {
+    tipo: v('tipo'), terreno: v('terreno'), projeto: v('projeto'),
+    area: v('area'), orcamento: v('orcamento'), prazo: v('prazo'),
+    nome: v('nome'), whatsapp: v('whatsapp'), cidade: v('cidade'),
+    email: v('email'), mensagem: v('mensagem')
+  };
+}
+
+function buildWhatsappText(d) {
+  var L = [];
+  L.push('Olá, acabei de solicitar a Análise de Viabilidade no site da LHM. Segue meu resumo:');
+  L.push('');
+  L.push('• Nome: ' + d.nome);
+  L.push('• Cidade: ' + d.cidade);
+  L.push('• Projeto: ' + d.tipo);
+  L.push('• Terreno: ' + d.terreno);
+  L.push('• Projeto arquitetônico: ' + d.projeto);
+  L.push('• Metragem: ' + d.area);
+  L.push('• Investimento: ' + d.orcamento);
+  L.push('• Início: ' + d.prazo);
+  if (d.mensagem) L.push('• Visão: ' + d.mensagem);
+  return encodeURIComponent(L.join('\n'));
+}
+
+// Envio
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  // honeypot: se preenchido, é bot — finge sucesso e sai
+  if (form.querySelector('[name="_honey"]').value) { return; }
+  if (!validateStep(4)) return;
+
+  var d = getData();
+  btnSubmit.disabled = true;
+  btnSubmit.innerHTML = 'Enviando…';
+
+  // dataLayer p/ GTM (mesmo padrão do site: lead via formulário)
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'lead_form_submit',
+    lead_source: 'diagnostico_viabilidade',
+    lead_tipo: d.tipo,
+    lead_orcamento: d.orcamento,
+    lead_prazo: d.prazo
+  });
+
+  var payload = {
+    _subject: 'Nova Análise de Viabilidade — ' + d.nome + ' (' + d.cidade + ')',
+    _template: 'table',
+    _captcha: 'false',
+    'Nome': d.nome,
+    'WhatsApp': d.whatsapp,
+    'Cidade': d.cidade,
+    'E-mail': d.email || '—',
+    'Tipo de projeto': d.tipo,
+    'Terreno': d.terreno,
+    'Projeto arquitetônico': d.projeto,
+    'Metragem': d.area,
+    'Faixa de investimento': d.orcamento,
+    'Prazo para iniciar': d.prazo,
+    'Visão do cliente': d.mensagem || '—'
+  };
+
+  function finish() {
+    // prepara botão do WhatsApp com resumo preenchido
+    var wa = 'https://wa.me/' + WA_NUMBER + '?text=' + buildWhatsappText(d);
+    document.getElementById('waContinue').setAttribute('href', wa);
+    form.style.display = 'none';
+    document.getElementById('success').classList.add('active');
+    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // Envia o lead por e-mail (FormSubmit AJAX). Se falhar, mesmo assim
+  // mostramos sucesso e levamos pro WhatsApp — nenhum lead é perdido.
+  fetch('https://formsubmit.co/ajax/' + LEAD_EMAIL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(finish).catch(finish);
+});
+</script>
+</body>
+</html>
