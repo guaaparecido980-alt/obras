@@ -544,7 +544,7 @@ var WA_NUMBER    = "5541998822772";                // WhatsApp da LHM
 var TOTAL_STEPS  = 4;
 var STORAGE_KEY  = "lhm_diag_v1";                  // chave do salvamento automático
 var AD_CONVERSION_ID    = "AW-18124668145";        // Google Ads — ID de conversão
-var AD_CONVERSION_LABEL = "";                       // Google Ads — rótulo (preencher quando tiver)
+var AD_CONVERSION_LABEL = "_0AcCNqbubscEPH5wcJD";   // Google Ads — rótulo da conversão de lead
 
 var form = document.getElementById('diagForm');
 var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
@@ -750,10 +750,16 @@ form.addEventListener('submit', function(e){
 
   function finish() {
     try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
-    // Conversão Google Ads — só dispara quando o rótulo estiver preenchido
+    // Conversão Google Ads — valor proporcional à qualidade do lead
+    // (quente=3, morno=2, frio=1) pra otimizar a campanha por lead bom, não só por volume
     try {
       if (AD_CONVERSION_LABEL && typeof gtag === 'function') {
-        gtag('event', 'conversion', { 'send_to': AD_CONVERSION_ID + '/' + AD_CONVERSION_LABEL });
+        var convValue = score.label === 'QUENTE' ? 3 : (score.label === 'MORNO' ? 2 : 1);
+        gtag('event', 'conversion', {
+          'send_to': AD_CONVERSION_ID + '/' + AD_CONVERSION_LABEL,
+          'value': convValue,
+          'currency': 'BRL'
+        });
       }
     } catch(e){}
     // prepara botão do WhatsApp com resumo preenchido
