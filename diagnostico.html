@@ -305,6 +305,11 @@ h1, h2, h3 {
 .success .btn-wa:hover { filter: brightness(1.08); transform: translateY(-1px); }
 .success .small { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-top: var(--s-3); }
 
+.next-steps { list-style: none; text-align: left; max-width: 360px; margin: 0 auto var(--s-4); border-top: 1px solid var(--line); }
+.next-steps li { display: flex; gap: 0.85rem; align-items: flex-start; padding: var(--s-2) 0; border-bottom: 1px solid var(--line); font-size: 0.9rem; color: var(--text-muted); }
+.next-steps li b { font-family: var(--f-mono); font-size: 0.72rem; color: var(--gold); border: 1px solid var(--line-gold); width: 26px; height: 26px; display: grid; place-items: center; flex-shrink: 0; border-radius: 50%; }
+.next-steps li strong { color: var(--text); font-weight: 500; }
+
 footer.mini {
   position: relative; z-index: 2;
   border-top: 1px solid var(--line); padding: var(--s-3) var(--s-4);
@@ -500,6 +505,11 @@ footer.mini a:hover { color: var(--gold); }
       </div>
       <h2>Recebemos seu <em>projeto</em>.</h2>
       <p>O engenheiro responsável já foi notificado e retorna em até 2 horas úteis. Quer adiantar? Continue agora pelo WhatsApp — seu resumo já vai preenchido.</p>
+      <ol class="next-steps">
+        <li><b>1</b><span><strong>Análise técnica.</strong> O engenheiro revisa seu projeto pessoalmente — não um atendente.</span></li>
+        <li><b>2</b><span><strong>Retorno em até 2h úteis.</strong> Você recebe um primeiro parecer, sem compromisso.</span></li>
+        <li><b>3</b><span><strong>Estudo de Viabilidade.</strong> Se fizer sentido para os dois lados, avançamos com orçamento fechado.</span></li>
+      </ol>
       <a href="#" class="btn-wa" id="waContinue" target="_blank" rel="noopener">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         Continuar no WhatsApp
@@ -521,6 +531,7 @@ footer.mini a:hover { color: var(--gold); }
 var LEAD_EMAIL   = "guaaparecido980@gmail.com"; // recebe os leads por e-mail (FormSubmit)
 var WA_NUMBER    = "5541998822772";                // WhatsApp da LHM
 var TOTAL_STEPS  = 4;
+var STORAGE_KEY  = "lhm_diag_v1";                  // chave do salvamento automático
 
 var form = document.getElementById('diagForm');
 var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
@@ -532,7 +543,7 @@ var btnSubmit = document.getElementById('btnSubmit');
 var fill      = document.getElementById('progressFill');
 var stepLabel = document.getElementById('progressStep');
 
-function showStep(n) {
+function showStep(n, noScroll) {
   current = n;
   steps.forEach(function(s){ s.classList.toggle('active', Number(s.dataset.step) === n); });
   fill.style.width = (n / TOTAL_STEPS * 100) + '%';
@@ -540,8 +551,9 @@ function showStep(n) {
   btnBack.classList.toggle('hidden', n === 1);
   btnNext.style.display   = (n === TOTAL_STEPS) ? 'none' : 'inline-flex';
   btnSubmit.style.display = (n === TOTAL_STEPS) ? 'inline-flex' : 'none';
+  saveState();
   // foca o topo do cartão para não "pular" a tela no mobile
-  document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (!noScroll) document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // Validação por etapa
@@ -589,6 +601,59 @@ steps[0].querySelectorAll('input[name="tipo"]').forEach(function(r){
   r.addEventListener('change', function(){ setTimeout(function(){ showStep(2); }, 250); });
 });
 
+// Máscara de telefone brasileiro — (41) 99999-9999
+var phoneEl = document.getElementById('whatsapp');
+function maskPhone(v){
+  v = v.replace(/\D/g,'').slice(0,11);
+  if (v.length <= 2)  return v.length ? '(' + v : v;
+  if (v.length <= 6)  return '(' + v.slice(0,2) + ') ' + v.slice(2);
+  if (v.length <= 10) return '(' + v.slice(0,2) + ') ' + v.slice(2,6) + '-' + v.slice(6);
+  return '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+}
+phoneEl.addEventListener('input', function(){ this.value = maskPhone(this.value); });
+
+// Salvamento automático (localStorage) — se a pessoa sair e voltar, não perde nada
+function saveState(){
+  try {
+    var o = {}; new FormData(form).forEach(function(val, key){ if (key !== '_honey') o[key] = val; });
+    o.__step = current;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(o));
+  } catch(e){}
+}
+function restoreState(){
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY); if (!raw) return;
+    var o = JSON.parse(raw);
+    Object.keys(o).forEach(function(k){
+      if (k === '__step') return;
+      var radios = form.querySelectorAll('input[type=radio][name="'+k+'"]');
+      if (radios.length) { radios.forEach(function(r){ if (r.value === o[k]) r.checked = true; }); }
+      else { var f = form.querySelector('[name="'+k+'"]'); if (f && o[k]) f.value = o[k]; }
+    });
+    if (o.__step && o.__step >= 1 && o.__step <= TOTAL_STEPS) showStep(o.__step, true);
+  } catch(e){}
+}
+restoreState();
+form.addEventListener('input', saveState);
+form.addEventListener('change', saveState);
+
+// Link inteligente por anúncio: ?tipo=tiny já marca "Tiny House", etc.
+var TIPO_MAP = { steel:'Casa em Steel Frame', alvenaria:'Casa em Alvenaria', tiny:'Tiny House', comercial:'Obra Comercial', ampliacao:'Ampliação / Reforma' };
+var qtipo = new URLSearchParams(location.search).get('tipo');
+if (qtipo && TIPO_MAP[qtipo.toLowerCase()]) {
+  var rt = form.querySelector('input[name="tipo"][value="'+TIPO_MAP[qtipo.toLowerCase()]+'"]');
+  if (rt) rt.checked = true;
+}
+
+// Enter avança para a próxima etapa (exceto dentro do textarea)
+form.addEventListener('keydown', function(e){
+  if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA') {
+    e.preventDefault();
+    if (current < TOTAL_STEPS) { if (validateStep(current)) showStep(current + 1); }
+    else { btnSubmit.click(); }
+  }
+});
+
 // Monta o resumo legível dos dados
 function getData() {
   var fd = new FormData(form);
@@ -617,6 +682,19 @@ function buildWhatsappText(d) {
   return encodeURIComponent(L.join('\n'));
 }
 
+// Classifica o lead — aparece SÓ no e-mail do dono, nunca no WhatsApp do cliente
+function scoreLead(d) {
+  var s = 0;
+  var orc = {'Acima de R$ 1 milhão':3,'R$ 600 mil a R$ 1 milhão':3,'R$ 300 mil a R$ 600 mil':2,'R$ 150 mil a R$ 300 mil':1,'Até R$ 150 mil':1,'Ainda não defini':0};
+  var pz  = {'Imediato (até 3 meses)':3,'3 a 6 meses':2,'6 a 12 meses':1,'Ainda estudando':0};
+  var te  = {'Sim, já tenho':2,'Vou construir em terreno próprio existente':2,'Em negociação':1,'Ainda vou comprar':0};
+  s += orc[d.orcamento] || 0; s += pz[d.prazo] || 0; s += te[d.terreno] || 0;
+  if (d.projeto === 'Sim, projeto completo' || d.projeto === 'Tenho uma planta/ideia inicial') s += 1;
+  if (s >= 7) return { label:'QUENTE', tag:'🔥 QUENTE — prioridade alta (orçamento, prazo e terreno alinhados)' };
+  if (s >= 4) return { label:'MORNO', tag:'🟡 MORNO — bom lead, qualificar com calma' };
+  return { label:'FRIO', tag:'🔵 FRIO — baixa urgência, nutrir e acompanhar' };
+}
+
 // Envio
 form.addEventListener('submit', function(e){
   e.preventDefault();
@@ -638,10 +716,12 @@ form.addEventListener('submit', function(e){
     lead_prazo: d.prazo
   });
 
+  var score = scoreLead(d);
   var payload = {
-    _subject: 'Nova Análise de Viabilidade — ' + d.nome + ' (' + d.cidade + ')',
+    _subject: '[' + score.label + '] Análise de Viabilidade — ' + d.nome + ' (' + d.cidade + ')',
     _template: 'table',
     _captcha: 'false',
+    'Prioridade': score.tag,
     'Nome': d.nome,
     'WhatsApp': d.whatsapp,
     'Cidade': d.cidade,
@@ -656,6 +736,7 @@ form.addEventListener('submit', function(e){
   };
 
   function finish() {
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
     // prepara botão do WhatsApp com resumo preenchido
     var wa = 'https://wa.me/' + WA_NUMBER + '?text=' + buildWhatsappText(d);
     document.getElementById('waContinue').setAttribute('href', wa);
