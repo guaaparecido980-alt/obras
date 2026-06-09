@@ -32,6 +32,17 @@
   })(window,document,'script','dataLayer','GTM-MQVDGB9D');
 </script>
 
+<!-- ============================================================
+  GOOGLE ADS — etiqueta Google (AW-18124668145)
+  Conecta a conta e serve de base para a conversão de lead do form.
+  Respeita o Consent Mode definido acima (LGPD).
+============================================================= -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18124668145"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'AW-18124668145');
+</script>
+
 <title>Análise de Viabilidade | LHM Engenharia — Steel Frame em Curitiba</title>
 <meta name="description" content="Solicite a Análise de Viabilidade do seu projeto com a LHM Engenharia. Processo estruturado, sigiloso e direto com o engenheiro responsável. Atendemos no máximo 6 obras por ano." />
 <meta name="robots" content="noindex, follow" />
@@ -532,6 +543,8 @@ var LEAD_EMAIL   = "guaaparecido980@gmail.com"; // recebe os leads por e-mail (F
 var WA_NUMBER    = "5541998822772";                // WhatsApp da LHM
 var TOTAL_STEPS  = 4;
 var STORAGE_KEY  = "lhm_diag_v1";                  // chave do salvamento automático
+var AD_CONVERSION_ID    = "AW-18124668145";        // Google Ads — ID de conversão
+var AD_CONVERSION_LABEL = "";                       // Google Ads — rótulo (preencher quando tiver)
 
 var form = document.getElementById('diagForm');
 var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
@@ -737,6 +750,12 @@ form.addEventListener('submit', function(e){
 
   function finish() {
     try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+    // Conversão Google Ads — só dispara quando o rótulo estiver preenchido
+    try {
+      if (AD_CONVERSION_LABEL && typeof gtag === 'function') {
+        gtag('event', 'conversion', { 'send_to': AD_CONVERSION_ID + '/' + AD_CONVERSION_LABEL });
+      }
+    } catch(e){}
     // prepara botão do WhatsApp com resumo preenchido
     var wa = 'https://wa.me/' + WA_NUMBER + '?text=' + buildWhatsappText(d);
     document.getElementById('waContinue').setAttribute('href', wa);
