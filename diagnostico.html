@@ -330,6 +330,191 @@ footer.mini {
 }
 footer.mini a { color: var(--text-muted); }
 footer.mini a:hover { color: var(--gold); }
+
+/* ============================================================
+  CSS do banner de cookies e modal (espelha o index.html)
+============================================================= */
+#cookie-banner {
+  position: fixed;
+  left: var(--s-3); right: var(--s-3); bottom: var(--s-3);
+  z-index: 999;
+  max-width: 560px;
+  margin-left: auto;
+  background: var(--bg-raised);
+  border: 1px solid var(--line-gold);
+  padding: var(--s-3);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+#cookie-banner.visible { opacity: 1; transform: translateY(0); }
+
+.cookie-title {
+  font-family: var(--f-display);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.cookie-text p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  margin-bottom: var(--s-2);
+}
+.cookie-link {
+  color: var(--gold);
+  border-bottom: 1px solid var(--line-gold);
+  transition: color 0.2s;
+}
+.cookie-link:hover { color: var(--gold-bright); }
+
+.cookie-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.cookie-btn {
+  padding: 0.65rem 1.1rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: var(--f-body);
+  transition: all 0.25s;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+}
+.cookie-btn-config {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--line-strong);
+}
+.cookie-btn-config:hover { color: var(--text); border-color: var(--text-muted); }
+.cookie-btn-reject {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+}
+.cookie-btn-reject:hover { border-color: var(--gold); color: var(--gold); }
+.cookie-btn-accept {
+  background: var(--gold);
+  color: var(--bg);
+  border: 1px solid var(--gold);
+}
+.cookie-btn-accept:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+
+@media (max-width: 600px) {
+  #cookie-banner { left: var(--s-2); right: var(--s-2); bottom: var(--s-2); padding: var(--s-3); }
+  .cookie-actions { flex-direction: column; }
+  .cookie-btn { width: 100%; padding: 0.85rem 1rem; }
+}
+
+/* Modal de configuração */
+#cookie-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(5, 5, 6, 0.85);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-3);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+#cookie-modal.visible { opacity: 1; }
+
+.cookie-modal-inner {
+  background: var(--bg-raised);
+  border: 1px solid var(--line-gold);
+  padding: var(--s-4);
+  max-width: 520px;
+  width: 100%;
+}
+.cookie-modal-inner h3 {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: var(--s-3);
+  padding-bottom: var(--s-2);
+  border-bottom: 1px solid var(--line);
+}
+.cookie-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s-3);
+  padding: var(--s-2) 0;
+  border-bottom: 1px solid var(--line);
+}
+.cookie-option:last-of-type { border-bottom: none; }
+.cookie-option strong {
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.cookie-option p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Switch toggle */
+.cookie-switch {
+  position: relative;
+  display: inline-block;
+  width: 42px; height: 24px;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+.cookie-switch input { opacity: 0; width: 0; height: 0; }
+.cookie-switch span {
+  position: absolute; inset: 0;
+  background: var(--bg-accent);
+  border: 1px solid var(--line-strong);
+  transition: 0.25s;
+  cursor: pointer;
+}
+.cookie-switch span::before {
+  content: "";
+  position: absolute;
+  width: 16px; height: 16px;
+  left: 3px; top: 50%;
+  transform: translateY(-50%);
+  background: var(--text-muted);
+  transition: 0.25s;
+}
+.cookie-switch input:checked + span { background: var(--gold); border-color: var(--gold); }
+.cookie-switch input:checked + span::before { transform: translate(18px, -50%); background: var(--bg); }
+.cookie-switch input:disabled + span { opacity: 0.5; cursor: not-allowed; }
+
+.cookie-modal-actions {
+  margin-top: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+.cookie-btn-cancel {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--line-strong);
+}
+.cookie-btn-cancel:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+.cookie-btn-save {
+  background: var(--gold);
+  color: var(--bg);
+  border: 1px solid var(--gold);
+}
+.cookie-btn-save:hover { background: var(--gold-bright); }
 </style>
 </head>
 
@@ -532,7 +717,7 @@ footer.mini a:hover { color: var(--gold); }
 
 <footer class="mini">
   <span>© 2026 LHM Engenharia · CREA-PR</span>
-  <span><a href="/privacidade.html">Privacidade</a> · <a href="/termos.html">Termos</a> · <a href="https://wa.me/5541998822772" target="_blank" rel="noopener">WhatsApp (41) 99882-2772</a></span>
+  <span><a href="/privacidade.html">Privacidade</a> · <a href="/termos.html">Termos</a> · <a href="#" id="open-cookie-config">Gerenciar cookies</a> · <a href="https://wa.me/5541998822772" target="_blank" rel="noopener">WhatsApp (41) 99882-2772</a></span>
 </footer>
 
 <script>
@@ -778,6 +963,147 @@ form.addEventListener('submit', function(e){
     body: JSON.stringify(payload)
   }).then(finish).catch(finish);
 });
+
+// ============================================================
+//  LGPD COOKIE CONSENT — banner + gestão de preferências
+//  (idêntico ao index.html — mesma chave de localStorage,
+//  então quem já decidiu no site principal não vê o banner de novo aqui.
+//  Sem isso, o Consent Mode fica sempre "denied" nesta página e o
+//  Google Ads NUNCA conta a conversão do formulário.)
+// ============================================================
+document.getElementById('open-cookie-config')?.addEventListener('click', function(e){
+  e.preventDefault();
+  var STORAGE_KEY = 'lhm_cookie_consent_v1';
+  var saved = localStorage.getItem(STORAGE_KEY);
+  var currentConsent = saved ? JSON.parse(saved) : { analytics: false, ads: false };
+  openCookieConfig(null, currentConsent);
+});
+
+(function initCookieConsent() {
+  var STORAGE_KEY = 'lhm_cookie_consent_v1';
+  var saved = localStorage.getItem(STORAGE_KEY);
+
+  if (saved) {
+    applyConsent(JSON.parse(saved));
+    return;
+  }
+
+  var banner = document.createElement('div');
+  banner.id = 'cookie-banner';
+  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('aria-label', 'Aviso de privacidade e cookies');
+  banner.innerHTML =
+    '<div class="cookie-content">' +
+      '<div class="cookie-text">' +
+        '<div class="cookie-title">Sua privacidade importa</div>' +
+        '<p>Usamos cookies para entender como você navega no site e melhorar sua experiência. Você pode aceitar todos, recusar os opcionais ou configurar individualmente. Leia nossa <a href="/privacidade.html" class="cookie-link">Política de Privacidade</a>.</p>' +
+      '</div>' +
+      '<div class="cookie-actions">' +
+        '<button class="cookie-btn cookie-btn-config" id="cookie-config">Configurar</button>' +
+        '<button class="cookie-btn cookie-btn-reject" id="cookie-reject">Recusar opcionais</button>' +
+        '<button class="cookie-btn cookie-btn-accept" id="cookie-accept">Aceitar todos</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(banner);
+
+  setTimeout(function(){ banner.classList.add('visible'); }, 500);
+
+  document.getElementById('cookie-accept').addEventListener('click', function(){
+    var consent = { analytics: true, ads: true, functional: true, timestamp: Date.now() };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+    applyConsent(consent);
+    banner.remove();
+  });
+
+  document.getElementById('cookie-reject').addEventListener('click', function(){
+    var consent = { analytics: false, ads: false, functional: true, timestamp: Date.now() };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
+    applyConsent(consent);
+    banner.remove();
+  });
+
+  document.getElementById('cookie-config').addEventListener('click', function(){
+    openCookieConfig(banner);
+  });
+})();
+
+function applyConsent(consent) {
+  window._consentGiven = consent.analytics || consent.ads;
+  gtag('consent', 'update', {
+    'ad_storage': consent.ads ? 'granted' : 'denied',
+    'ad_user_data': consent.ads ? 'granted' : 'denied',
+    'ad_personalization': consent.ads ? 'granted' : 'denied',
+    'analytics_storage': consent.analytics ? 'granted' : 'denied'
+  });
+  if (consent.ads) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'consent_ads_granted' });
+  }
+}
+
+function openCookieConfig(banner, currentConsent) {
+  var consent = currentConsent || { analytics: false, ads: false };
+
+  var modal = document.createElement('div');
+  modal.id = 'cookie-modal';
+  modal.setAttribute('role', 'dialog');
+  modal.setAttribute('aria-modal', 'true');
+  modal.setAttribute('aria-label', 'Configurar cookies');
+  modal.innerHTML =
+    '<div class="cookie-modal-inner">' +
+      '<h3>Configurar cookies</h3>' +
+      '<div class="cookie-option">' +
+        '<div><strong>Essenciais</strong><p>Necessários para o funcionamento do site. Não podem ser desativados.</p></div>' +
+        '<label class="cookie-switch"><input type="checkbox" checked disabled><span></span></label>' +
+      '</div>' +
+      '<div class="cookie-option">' +
+        '<div><strong>Análise</strong><p>Ajudam a entender como você usa o site (Google Analytics).</p></div>' +
+        '<label class="cookie-switch"><input type="checkbox" id="opt-analytics" ' + (consent.analytics ? 'checked' : '') + '><span></span></label>' +
+      '</div>' +
+      '<div class="cookie-option">' +
+        '<div><strong>Marketing</strong><p>Permitem anúncios relevantes em outras plataformas (Meta, Google Ads).</p></div>' +
+        '<label class="cookie-switch"><input type="checkbox" id="opt-ads" ' + (consent.ads ? 'checked' : '') + '><span></span></label>' +
+      '</div>' +
+      '<div class="cookie-modal-actions">' +
+        '<button class="cookie-btn cookie-btn-cancel" id="cookie-cancel">Cancelar</button>' +
+        '<button class="cookie-btn cookie-btn-save" id="cookie-save">Salvar preferências</button>' +
+      '</div>' +
+    '</div>';
+  document.body.appendChild(modal);
+  setTimeout(function(){ modal.classList.add('visible'); }, 10);
+
+  function closeModal() {
+    modal.classList.remove('visible');
+    setTimeout(function(){ modal.remove(); }, 300);
+  }
+
+  document.getElementById('cookie-save').addEventListener('click', function(){
+    var newConsent = {
+      analytics: document.getElementById('opt-analytics').checked,
+      ads: document.getElementById('opt-ads').checked,
+      functional: true,
+      timestamp: Date.now()
+    };
+    localStorage.setItem('lhm_cookie_consent_v1', JSON.stringify(newConsent));
+    applyConsent(newConsent);
+    closeModal();
+    if (banner) banner.remove();
+  });
+
+  document.getElementById('cookie-cancel').addEventListener('click', closeModal);
+
+  modal.addEventListener('click', function(e){
+    if (e.target === modal) closeModal();
+  });
+
+  var escHandler = function(e){
+    if (e.key === 'Escape') {
+      closeModal();
+      document.removeEventListener('keydown', escHandler);
+    }
+  };
+  document.addEventListener('keydown', escHandler);
+}
 </script>
 </body>
 </html>
