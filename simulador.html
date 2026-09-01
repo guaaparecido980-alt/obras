@@ -89,6 +89,7 @@ body{
   mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,#000 40%,transparent 100%);
 }
 .wrap{position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--s-3)}
+h1,h2,.res-faixa,.lead,p{overflow-wrap:break-word}
 
 /* topo */
 .topbar{
@@ -111,7 +112,7 @@ body{
 }
 h1{
   font-family:var(--f-display);font-weight:300;line-height:1.08;letter-spacing:-.02em;
-  font-size:clamp(2.1rem,5.4vw,3.6rem);margin-bottom:var(--s-2)
+  font-size:clamp(1.65rem,6.4vw,3.6rem);margin-bottom:var(--s-2)
 }
 h1 em{font-style:italic;color:var(--gold)}
 .lead{color:var(--text-muted);font-size:1.05rem;max-width:60ch}
@@ -162,25 +163,29 @@ input[type=range]::-moz-range-thumb{
 
 /* resultado */
 .resultado{
-  background:var(--bg-deep);border-top:1px solid var(--line-gold);padding:var(--s-4);
-  display:grid;grid-template-columns:1.4fr 1fr;gap:var(--s-4);align-items:center
+  background:var(--bg-deep);border-bottom:1px solid var(--line-gold);
+  padding:var(--s-4);text-align:center
 }
 .res-label{
   font-family:var(--f-mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
   color:var(--text-dim);margin-bottom:.6rem
 }
 .res-faixa{
-  font-family:var(--f-display);font-weight:300;letter-spacing:-.02em;line-height:1.05;
-  font-size:clamp(1.7rem,4.4vw,2.6rem);color:var(--paper)
+  font-family:var(--f-display);font-weight:300;letter-spacing:-.02em;line-height:1.15;
+  white-space:nowrap;
+  font-size:clamp(1.3rem,6vw,2.6rem);color:var(--paper)
 }
 .res-faixa .ate{color:var(--text-dim);font-size:.55em;font-style:italic;padding:0 .35em}
 .res-m2{margin-top:.7rem;font-family:var(--f-mono);font-size:.85rem;color:var(--gold)}
-.res-nota{font-size:.85rem;color:var(--text-dim);border-left:2px solid var(--line-gold);padding-left:var(--s-2)}
+.res-nota{
+  font-size:.85rem;color:var(--text-dim);border-left:2px solid var(--line-gold);
+  padding-left:var(--s-2);margin-top:var(--s-3)
+}
 
 /* seções */
 section{padding:var(--s-6) 0}
 h2{
-  font-family:var(--f-display);font-weight:300;font-size:clamp(1.5rem,3.4vw,2.1rem);
+  font-family:var(--f-display);font-weight:300;font-size:clamp(1.35rem,4.2vw,2.1rem);
   letter-spacing:-.01em;margin-bottom:var(--s-1)
 }
 .sub{color:var(--text-muted);margin-bottom:var(--s-4);max-width:62ch}
@@ -248,9 +253,16 @@ footer.mini a{color:var(--text-dim);text-decoration:none}
 footer.mini a:hover{color:var(--gold)}
 
 @media (max-width:820px){
-  .resultado{grid-template-columns:1fr;gap:var(--s-3)}
   .escopo{grid-template-columns:1fr}
-  .chip{min-width:100%}
+  /* No celular o valor precisa aparecer logo: hero mais curto, card mais cedo. */
+  .hero{padding:var(--s-4) 0 var(--s-2)}
+  .lead{font-size:.95rem}
+  .calc{margin-top:var(--s-3)}
+  .calc-inputs{padding:var(--s-3)}
+  .resultado{padding:var(--s-3) var(--s-2)}
+  .wrap{padding:0 var(--s-2)}
+  .res-label{font-size:.62rem;letter-spacing:.14em}
+  .campo-head{flex-wrap:wrap}
 }
 </style>
 </head>
@@ -286,51 +298,22 @@ footer.mini a:hover{color:var(--gold)}
     </div>
 
     <div class="calc">
+      <div class="resultado">
+        <div class="res-label">Investimento estimado — entrega em obra cinza</div>
+        <div class="res-faixa" id="faixa" aria-live="polite">
+          R$ 580.000 <span class="ate">a</span> R$ 680.000
+        </div>
+        <div class="res-m2" id="porM2">≈ R$ 3.500 / m² · 180 m²</div>
+      </div>
+
       <div class="calc-inputs">
         <div class="campo">
           <div class="campo-head">
-            <label class="campo-label" for="area">Área construída</label>
+            <label class="campo-label" for="area">Arraste a área construída</label>
             <div class="campo-valor"><span id="areaOut">180</span> <small>m²</small></div>
           </div>
-          <input type="range" id="area" min="60" max="600" step="5" value="180"
-                 aria-describedby="areaOut" />
+          <input type="range" id="area" min="60" max="600" step="5" value="180" aria-describedby="areaOut" />
           <div class="range-marks"><span>60 m²</span><span>600 m²</span></div>
-        </div>
-
-        <div class="campo">
-          <div class="campo-head"><span class="campo-label">Pavimentos</span></div>
-          <div class="chips" id="gPav" role="group" aria-label="Número de pavimentos">
-            <button type="button" class="chip" data-add="0"    aria-pressed="true">Térreo<small>um piso</small></button>
-            <button type="button" class="chip" data-add="0.05" aria-pressed="false">Sobrado<small>dois pisos</small></button>
-            <button type="button" class="chip" data-add="0.12" aria-pressed="false">Três pisos<small>ou mais</small></button>
-          </div>
-        </div>
-
-        <div class="campo">
-          <div class="campo-head"><span class="campo-label">Terreno</span></div>
-          <div class="chips" id="gTer" role="group" aria-label="Condição do terreno">
-            <button type="button" class="chip" data-add="0"    aria-pressed="true">Plano<small>sem desnível</small></button>
-            <button type="button" class="chip" data-add="0.05" aria-pressed="false">Desnível leve<small>até 1,5 m</small></button>
-            <button type="button" class="chip" data-add="0.12" aria-pressed="false">Aclive ou declive<small>talude, arrimo</small></button>
-          </div>
-        </div>
-
-        <div class="campo">
-          <div class="campo-head"><span class="campo-label">Região</span></div>
-          <div class="chips" id="gReg" role="group" aria-label="Região da obra">
-            <button type="button" class="chip" data-add="0"    aria-pressed="true">Curitiba e região<small>região metropolitana</small></button>
-            <button type="button" class="chip" data-add="0.06" aria-pressed="false">Litoral do Paraná<small>logística e maresia</small></button>
-          </div>
-        </div>
-      </div>
-
-      <div class="resultado">
-        <div>
-          <div class="res-label">Investimento estimado — entrega em obra cinza</div>
-          <div class="res-faixa" id="faixa" aria-live="polite">
-            R$ 578.000 <span class="ate">a</span> R$ 680.000
-          </div>
-          <div class="res-m2" id="porM2">≈ R$ 3.500 / m² · 180 m²</div>
         </div>
         <p class="res-nota">
           Faixa de referência, não é proposta. O valor fechado sai depois da visita técnica
@@ -401,18 +384,21 @@ footer.mini a:hover{color:var(--gold)}
     <section>
       <h2>De onde vem esse número</h2>
       <p class="sub">
-        Sem caixa-preta. A conta que roda nesta página é esta, e ela muda na sua frente
-        conforme você ajusta as opções acima.
+        Sem caixa-preta: a faixa é a área que você escolheu multiplicada pelo nosso valor de
+        referência de obra cinza, com uma margem para mais e para menos.
       </p>
       <div class="transp">
-        <ul id="memoria">
+        <ul>
           <li><span>Valor de referência — obra cinza</span><span>R$ 3.500 / m²</span></li>
+          <li><span>Conta da faixa</span><span>área × R$ 3.500, ± 8%</span></li>
+          <li><span>Engenheiro responsável e ART</span><span>inclusos</span></li>
         </ul>
       </div>
       <p class="aviso">
-        Os acréscimos são somados e limitados a <b>+20%</b> no total. Obra com pé-direito duplo,
-        vãos livres grandes, piscina, muro de arrimo ou demolição prévia sai da simulação —
-        casos assim a gente orça olhando o projeto, porque estimativa genérica ali erra feio.
+        <b>O que pode mudar esse valor:</b> número de pavimentos, terreno em aclive ou declive
+        (talude e muro de arrimo mudam a fundação), obra no Litoral, pé-direito duplo, vãos livres
+        grandes, piscina ou demolição prévia. Nada disso cabe numa simulação genérica sem errar
+        feio — a gente ajusta olhando o projeto, e aí o preço é fechado.
       </p>
     </section>
 
@@ -450,109 +436,44 @@ footer.mini a:hover{color:var(--gold)}
   'use strict';
 
   // ============================================================
-  // Parâmetros do cálculo — obra cinza.
-  // BASE saiu do escopo padrão da LHM (radier + estrutura + fechamento +
-  // isolamento + forro + elétrica + hidráulica, sem acabamento).
-  // O teto de acréscimo existe para a simulação nunca ultrapassar o valor
-  // do serviço mais completo da casa (chave na mão).
+  // Uma variável só, de propósito: no celular a pessoa precisa ver o número
+  // enquanto arrasta, não depois de responder três perguntas. Pavimentos,
+  // terreno e região mudam o valor de verdade — mas isso entra na conversa,
+  // não na simulação. Aqui vale a base honesta.
   // ============================================================
-  var BASE_M2   = 3500;
-  var TETO_ADD  = 0.20;   // acréscimo somado máximo
+  var BASE_M2   = 3500;   // obra cinza — trocar aqui muda a página inteira
   var BANDA     = 0.08;   // ± da faixa exibida
   var WA_NUMBER = '5541998822772';
 
-  var area   = document.getElementById('area');
-  var areaOut= document.getElementById('areaOut');
-  var faixa  = document.getElementById('faixa');
-  var porM2  = document.getElementById('porM2');
-  var memoria= document.getElementById('memoria');
-  var btnWa  = document.getElementById('btnWa');
+  var area    = document.getElementById('area');
+  var areaOut = document.getElementById('areaOut');
+  var faixa   = document.getElementById('faixa');
+  var porM2   = document.getElementById('porM2');
+  var btnWa   = document.getElementById('btnWa');
 
-  var grupos = [
-    { el: document.getElementById('gPav'), nome: 'Pavimentos' },
-    { el: document.getElementById('gTer'), nome: 'Terreno' },
-    { el: document.getElementById('gReg'), nome: 'Região' }
-  ];
+  function brl(v){ return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
 
-  function brl(v){
-    return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
-  }
-
-  /** Arredonda pra milhar — faixa com centavos passa impressão de exatidão que ela não tem. */
-  function milhar(v){
-    return Math.round(v / 1000) * 1000;
-  }
-
-  function selecionado(grupo){
-    var chips = grupo.el.querySelectorAll('.chip');
-    for (var i = 0; i < chips.length; i++){
-      if (chips[i].getAttribute('aria-pressed') === 'true') return chips[i];
-    }
-    return chips[0];
-  }
+  /** Arredonda pro milhar — centavos passariam uma exatidão que a estimativa não tem. */
+  function milhar(v){ return Math.round(v / 1000) * 1000; }
 
   function calcular(){
-    var m2 = parseInt(area.value, 10);
-    var somaAdd = 0;
-    var escolhas = [];
-
-    grupos.forEach(function(g){
-      var chip = selecionado(g);
-      var add = parseFloat(chip.getAttribute('data-add')) || 0;
-      somaAdd += add;
-      escolhas.push({
-        grupo: g.nome,
-        texto: chip.childNodes[0].nodeValue.trim(),
-        add: add
-      });
-    });
-
-    var limitado = Math.min(somaAdd, TETO_ADD);
-    var valorM2  = BASE_M2 * (1 + limitado);
-    var total    = valorM2 * m2;
+    var m2    = parseInt(area.value, 10);
+    var total = BASE_M2 * m2;
+    var min   = milhar(total * (1 - BANDA));
+    var max   = milhar(total * (1 + BANDA));
 
     areaOut.textContent = m2;
-    faixa.innerHTML = brl(milhar(total * (1 - BANDA))) +
-                      ' <span class="ate">a</span> ' +
-                      brl(milhar(total * (1 + BANDA)));
-    porM2.textContent = '≈ ' + brl(valorM2) + ' / m² · ' + m2 + ' m²';
+    faixa.innerHTML = brl(min) + ' <span class="ate">a</span> ' + brl(max);
+    porM2.textContent = '≈ ' + brl(BASE_M2) + ' / m² · ' + m2 + ' m²';
 
-    // Memória de cálculo — o cliente vê a conta inteira
-    var linhas = ['<li><span>Valor de referência — obra cinza</span><span>' + brl(BASE_M2) + ' / m²</span></li>'];
-    escolhas.forEach(function(e){
-      if (e.add > 0){
-        linhas.push('<li><span>' + e.grupo + ' — ' + e.texto + '</span><span>+' + Math.round(e.add * 100) + '%</span></li>');
-      }
-    });
-    if (somaAdd > TETO_ADD){
-      linhas.push('<li><span>Acréscimo limitado ao teto</span><span>+' + Math.round(TETO_ADD * 100) + '%</span></li>');
-    }
-    linhas.push('<li><span><b>Valor aplicado</b></span><span>' + brl(valorM2) + ' / m² × ' + m2 + ' m²</span></li>');
-    memoria.innerHTML = linhas.join('');
-
-    // WhatsApp já sai com a simulação escrita
-    var msg = 'Olá! Simulei no site da LHM: ' + m2 + ' m², ' +
-              escolhas.map(function(e){ return e.grupo.toLowerCase() + ': ' + e.texto.toLowerCase(); }).join(', ') +
-              '. A faixa deu ' + brl(milhar(total * (1 - BANDA))) + ' a ' + brl(milhar(total * (1 + BANDA))) +
-              '. Gostaria de conversar sobre o orçamento.';
-    btnWa.href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg);
+    btnWa.href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(
+      'Olá! Simulei no site da LHM: ' + m2 + ' m² e a faixa deu ' + brl(min) + ' a ' + brl(max) +
+      '. Gostaria de conversar sobre o orçamento.'
+    );
   }
-
-  // chips: um selecionado por grupo
-  grupos.forEach(function(g){
-    g.el.addEventListener('click', function(ev){
-      var chip = ev.target.closest('.chip');
-      if (!chip) return;
-      var chips = g.el.querySelectorAll('.chip');
-      for (var i = 0; i < chips.length; i++) chips[i].setAttribute('aria-pressed', 'false');
-      chip.setAttribute('aria-pressed', 'true');
-      calcular();
-    });
-  });
 
   area.addEventListener('input', calcular);
 
-  // Evento de simulação — só uma vez por sessão, pra não poluir o analytics
   var jaMediu = false;
   area.addEventListener('change', function(){
     if (jaMediu) return;
